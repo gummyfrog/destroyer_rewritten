@@ -33,8 +33,10 @@ class Destroyer {
 
 		this.updater = new Updater({name: "Jordan 2.0", desc: "it's jordan! 2.0! now with better updater."});
 		this.embeds = new embedManager();
-		this.quotes = new quoteManager(this.embeds, this.errorHandler);
-		this.searcher = new searchManager(codes, this.embeds, this.errorHandler);
+
+		this.stats = new statManager(this.embeds, this.errHandler);
+		this.quotes = new quoteManager(this.embeds, this.stats, this.errHandler);
+		this.searcher = new searchManager(codes, this.embeds, this.errHandler);
 
 		this.config = config
 
@@ -54,10 +56,10 @@ class Destroyer {
 		this.client.login(codes.token);
 	};
 
-	errorHandler(err) {
+	errHandler(err) {
 		console.log("There was an error!".bold.red)
-		console.log(err.red)
-		this.lastMessage.channel.send(this.embeds.error(err));
+		console.log(`${err}`.red)
+		this.searcher.lastMessage.channel.send(this.embeds.error(err));
 	}
 
 	checkWordsForBlacklist(words) {
@@ -117,6 +119,7 @@ class Destroyer {
 
 		var command = message.content.toLowerCase().substring(prefix.length).split(' ')[0];
 		var args = message.content.toLowerCase().substring(prefix.length + command.length + 1).toLowerCase();  
+		var author = message.author;
 
 		if(message.guild === null) {
 			// direct message
@@ -125,7 +128,9 @@ class Destroyer {
 			return;
 		} else {
 			console.log(`From "${message.guild.name}"`.green);
+			this.trackStat("messager", author)
 		}	
+
 
 
 		// these get deleted after use, so don't store a reference to them.
@@ -150,14 +155,20 @@ class Destroyer {
 		.then(res => {
 			if(["s", "search"].includes(command)) {
 				this.searcher.search(args);
+				this.stats.trackStat("searched", author)
+				this.stats.trackStat("commands", "search")
 			}
 
 			if(["ys", "youtube"].includes(command)) {
 				this.searcher.ytSearch(args);
+				this.stats.trackStat("youtubed", author)
+				this.stats.trackStat("commands", "youtube")
 			}
 
 			if(["gif", "g"].includes(command)) {
 				this.searcher.giphySearch(args);
+				this.stats.trackStat("gifs", author)
+				this.stats.trackStat("commands", "gifs")
 			}
 		})
 		.catch((err) => this.errHandler(err))
@@ -174,6 +185,7 @@ class Destroyer {
 
 		if(["q", "quote"].includes(command)) {
 			this.quotes.findMessage(message, args);
+			// oops
 		}
 
 		if(["sk", "skip"].includes(command)) {

@@ -1,8 +1,9 @@
 module.exports = class quoteManager {
 
-	constructor(embedManager, err) {
+	constructor(embedManager, statManager, err) {
 		this.embeds = embedManager;
-		this.errHandler = err
+		this.stats = statManager;
+		this.errHandler = err;
 	}
 
 
@@ -35,6 +36,10 @@ module.exports = class quoteManager {
 		if(searchedMsg != undefined) {
 			message.channel.send("Ok, here's the quote.", this.embeds.quote(searchedMsg))
 			archiveChannel.send(this.embeds.quote(searchedMsg));
+
+			this.stats.trackStat("quoting", message.author);
+			this.stats.trackStat("quoted", searchedMsg.author);
+
 		} else {
 			message.channel.send(this.embeds.alert(eMsg))
 		};

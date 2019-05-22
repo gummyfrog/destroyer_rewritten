@@ -200,8 +200,9 @@ module.exports = class embedManager {
 	}
 
 	status(statusObject) {
+		console.log(statusObject)
 		var embed = this.arbitraryObjectDisplay(statusObject, ["status", "last", "last-search"]);
-		embed.title = "What's Up?";s
+		embed.title = "What's Up?";
 		return({"embed":embed});
 	}
 

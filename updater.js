@@ -23,12 +23,9 @@ class Updater {
     return new Promise((resolve, reject) => {
       axios.get('http://frogeye.duckdns.org:8282/status')
       .then(response => {
-        console.log(response.status);
-        console.log(response.data);
         resolve(response.data);
       })
       .catch(err => {
-        console.log(err);
         reject(err);
       });
     });

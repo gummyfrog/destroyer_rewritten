@@ -1,5 +1,5 @@
 {
-	"blacklist": ["nsfw", "sexy", "furry", "gore", "hentai", "boob", "tit", "ass", "cum", "dick", "penis", "vagina", "porn", "foot", "feet", "toes"],
+	"blacklist": ["nsfw", "sexy", "furry", "gore", "hentai", "boob", "tit", "ass", "cum", "dick", "penis", "vagina", "porn", "foot", "feet", "toes", "pussy"],
 	"pos": "👁",
 	"neg": "😒",
 	"deletevotes": false,
