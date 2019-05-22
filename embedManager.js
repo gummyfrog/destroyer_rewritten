@@ -155,11 +155,14 @@ module.exports = class embedManager {
 		// i am a jankaholic
 
 		var c = 0;
-		stat.data = Object.keys(stat.data).sort(function(b,a){return stat.data[a]-stat.data[b]})
-		embed.fields = Object.keys(stat.data).map((key) => {			
+		var sorted = Object.keys(stat.data).sort(function(b,a){return stat.data[a]-stat.data[b]})
+
+		embed.fields = Object.keys(sorted).map((key) => {
+			console.log(stat.data)
+			console.log(key)
 			var field = {
 				name: "_ _",
-				value: `${stat.data[key]} at ${key}!!`
+				value: `${sorted[key]} at ${stat.data[sorted[key]]}!!`
 			}
 
 			if(stat.titles[c] != undefined) {
