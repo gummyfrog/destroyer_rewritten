@@ -140,9 +140,43 @@ module.exports = class embedManager {
 
 	// no binding required
 
+	leaderboard(name, stat) {
+		console.log(stat)
+		var embed = {
+			title: name,
+			description: stat.desc,
+			color: this.colors.leaderboard,
+			thumbnail: {
+				url : "https://www.shareicon.net/download/2016/07/27/802814_miscellaneous_512x512.png"
+			},
+			fields:[],
+		}
+
+		// i am a jankaholic
+
+		var c = 0;
+		stat.data = Object.keys(stat.data).sort(function(b,a){return stat.data[a]-stat.data[b]})
+		embed.fields = Object.keys(stat.data).map((key) => {			
+			var field = {
+				name: "_ _",
+				value: `${stat.data[key]}`
+			}
+
+			if(stat.titles[c] != undefined) {
+				field.name = stat.titles[c]
+			};
+
+			c+=1
+
+			return field
+		})
+
+		return({"embed":embed})
+	}
+
 	vote() {
 		var embed = {
-			title: "Whoa, there!",
+			title: "🛑✋ Whoa, there!",
 			description: "I'm not just gonna let you do that, motherfucker. What say you?",
 			color: this.colors.warn,
 		}
@@ -152,7 +186,7 @@ module.exports = class embedManager {
 
 	cancelledVote(count) {
 		var embed = {
-			title: "Well, there's always next time.",
+			title: "⚠️✋ Well, there's always next time.",
 			description: "It was probably a bad search anyway.",
 			fields: [
 			{
@@ -160,7 +194,7 @@ module.exports = class embedManager {
 				value: `This is the (${count})-th-st cancelled vote.`
 			}
 			],
-			color: this.colors.quote,
+			color: this.colors.leaderboard,
 		}
 
 		return({"embed":embed})
@@ -204,6 +238,12 @@ module.exports = class embedManager {
 		var embed = this.arbitraryObjectDisplay(statusObject, ["status", "last", "last-search"]);
 		embed.title = "What's Up?";
 		return({"embed":embed});
+	}
+
+	leaderboardList(statsObject) {
+		var embed = this.arbitraryObjectDisplay(statsObject, ["titles", "data"])
+		embed.title = "Tracked Stats"
+		return({"embed":embed})
 	}
 
 }

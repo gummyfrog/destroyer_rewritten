@@ -10,15 +10,11 @@ module.exports = class statManager {
 
 
 
- 	trackStat(stat, what, value = 1) {
- 		var w = what;
- 		if(typeof(what) == "Object" && what.id != undefined) {
- 			w = what.id
+ 	trackStat(stat, who, value = 1) {
+ 		var w = who;
+ 		if(typeof(who) == "Object" && who.id != undefined) {
+ 			w = who.id
  		}
-
-		if(!this.stats[stat]["data"]) {
-			this.stats[stat]["data"] = {};
-		}
 		
 		if(!this.stats[stat]["data"][w]) {
 			this.stats[stat]["data"][w] = 0;
@@ -30,8 +26,12 @@ module.exports = class statManager {
 		json.writeFileSync('./stats.json', this.stats);
 	}
 
-	getStat(stat, who) {
-		
+	getLeaderboard(stat) {
+		return(this.stats[stat])
+	}
+
+	getStatNames() {
+		return this.stats;
 	}
 
 

@@ -205,6 +205,14 @@ class Destroyer {
 			.catch((err) => this.errHandler(err))
 		}
 
+		if(["l", "leaderboard"].includes(command)) {
+			if(args != "") {
+				message.channel.send(this.embeds.leaderboard(args, this.stats.getLeaderboard(args)));
+			} else {
+				message.channel.send(this.embeds.leaderboardList(this.stats.getStatNames()))
+			}
+		}
+
 		// add a change config command;
 	}
 
