@@ -50,7 +50,6 @@ class Destroyer {
 
 		this.client.on("message", (message) => {
 			this.commandHandler(message);
-			// this.statTracker(message);
 		});
 
 		this.client.login(codes.token);
@@ -185,7 +184,7 @@ class Destroyer {
 
 		if(["q", "quote"].includes(command)) {
 			this.quotes.findMessage(message, args);
-			// oops
+			this.stats.trackStat("commands", "quote")
 		}
 
 		if(["sk", "skip"].includes(command)) {
