@@ -159,7 +159,7 @@ module.exports = class embedManager {
 		embed.fields = Object.keys(stat.data).map((key) => {			
 			var field = {
 				name: "_ _",
-				value: `${stat.data[key]}`
+				value: `${stat.data[key]} at ${key}!!`
 			}
 
 			if(stat.titles[c] != undefined) {
