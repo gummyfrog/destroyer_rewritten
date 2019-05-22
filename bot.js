@@ -128,7 +128,7 @@ class Destroyer {
 			return;
 		} else {
 			console.log(`From "${message.guild.name}"`.green);
-			this.trackStat("messager", author)
+			this.stats.trackStat("messager", author)
 		}	
 
 
