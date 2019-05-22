@@ -169,6 +169,7 @@ class Destroyer {
 
 		if(["h", "help"].includes(command)) {
 			message.channel.send(this.embeds.help(this.config.help));
+			message.channel.send(this.embeds.alert("Confirmed, this feature is working."))
 		}
 
 		if(["q", "quote"].includes(command)) {
