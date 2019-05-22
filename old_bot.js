@@ -92,7 +92,6 @@ let negEmojis = ["💩", "🖕", "👎", "👇", "👊", "🚫", "📉", "❎"];
 var killList = ['nsfw', 'sexy','preg', 'furry', 'furrys', 'gore', 'hentai', 'boob', 'tit', 'ass', 'cum', 'dick', 'penis', 'vagina', 'porn', 'foot', 'feet', 'toe']
 var ytOpts = {
   maxResults: 3,
-  key: 'AIzaSyB-fARtTEZbt1A-7hl4NpLfsgeQDuIWZEk'
 };
 
 var lastSearch = "none";
@@ -108,13 +107,6 @@ var wordFilter = true;
 
 
 // lol
-
-var twitter = new Twitter({
-	consumer_key: '7mNTCTIc3qb98ZzLnhXLY2wsc',
-	consumer_secret: 'yQ4lVMm3kEOFcTkIjyJ38TEMjP5xVYkSRCHHydXZTvkKuowPBN',
-	access_token_key: '4531311621-UUQQtjgCMJ4dsNVTA3oDIyTQPoZR9LF70RL3HEA',
-	access_token_secret: '3rECUkJQzDw7WtVFrZOa1tfssql3VwqJoEjTDshGwL6d9'
-})
 
 var updater = new Updater();
 updater.name = "jordan";
