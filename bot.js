@@ -170,7 +170,11 @@ class Destroyer {
 				this.stats.trackStat("commands", "gifs")
 			}
 		})
-		.catch((err) => this.errHandler(err))
+		.catch((err) => {
+			if(err != "Downvoted to hell") {
+				this.errHandler(err)
+			};
+		});
 
 
 
