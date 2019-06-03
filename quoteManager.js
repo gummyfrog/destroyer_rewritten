@@ -1,11 +1,10 @@
-module.exports = class quoteManager {
+var Manager = require('./manager.js')
 
-	constructor(embedManager, statManager, err) {
-		this.embeds = embedManager;
-		this.stats = statManager;
-		this.errHandler = err;
+module.exports = class quoteManager extends Manager {
+
+	constructor() {
+		super();
 	}
-
 
 	findMessage(message, args) {
 		var archiveChannel = message.guild.channels.find((channel) => channel.name.toLowerCase().includes("archive"));

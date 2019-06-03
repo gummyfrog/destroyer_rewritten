@@ -1,14 +1,10 @@
 var json = require('jsonfile');
 
-module.exports = class statManager {
+module.exports = class stats { 
 
-	constructor(embedManager, err) {
-		this.embeds = embedManager;
-		this.errHandler = err
+	constructor() {
 		this.stats = json.readFileSync('./stats.json');
 	}
-
-
 
  	trackStat(stat, who, value = 1) {
  		var w = who;
@@ -21,8 +17,7 @@ module.exports = class statManager {
 		}
 
 		this.stats[stat]["data"][w] = this.stats[stat]["data"][w] + value;
-		 console.log(this.stats[stat]["data"])
-
+		
 		json.writeFileSync('./stats.json', this.stats);
 	}
 

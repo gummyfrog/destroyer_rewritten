@@ -1,26 +1,25 @@
 var GoogleImages = require('google-images');
 var youtubeSearch = require('youtube-search-promise');
+var Manager = require('./manager.js')
 
-module.exports = class searchManager {
+module.exports = class search extends Manager {
 
-	constructor(codes, embeds, err) {
+	constructor() {
+		super();
 		this.lastMessage = null;	
 		this.globalScrollUpdateMessage = null;
 		this.globalScrollEmbeds = [];
 		this.globalScrollIndex = 0;
 		this.lastSearch = "jordan";
 		this.messagesSinceScrollUpdate
-		this.errHandler = err
 
 		this.yt_opts = {
 			maxResults: 8,
-			key: codes.YT,
+			key: this.codes.YT,
 		};
 
-		this.imgClient = new GoogleImages(codes.CSE, codes.API);
-		this.giphy = require('giphy-api')(codes.GIPHY)
-
-		this.embeds = embeds;
+		this.imgClient = new GoogleImages(this.codes.CSE, this.codes.API);
+		this.giphy = require('giphy-api')(this.codes.GIPHY)
 	}
 
 	setGlobalScrollEmbeds(items, embedFunction, c=10) {
@@ -64,13 +63,13 @@ module.exports = class searchManager {
 
 			images = images.map(img => {return img.url});
 			this.lastSearch = args;
-
+			
 			this.setGlobalScrollEmbeds(images, this.embeds.image, 20) // make this a setting!
 			this.lastMessage.channel.send(this.globalScrollEmbeds[0]).then((sentMessage) => {
 				this.globalScrollUpdateMessage = sentMessage;
 			});
 		})
-		.catch((err) => this.errHandler(err))
+		.catch((err) => this.errorHandler(err))
 	}
 
 	
@@ -96,7 +95,7 @@ module.exports = class searchManager {
 
 
 		})
-		.catch((err) => this.errHandler(err))
+		.catch((err) => this.errorHandler(err))
 
 	}	
 
@@ -114,14 +113,13 @@ module.exports = class searchManager {
 			console.log(res.data[0]);
 			res = res.data.map(obj => {return obj.images.original.url})
 
-			console.log(res);
 			this.lastSearch = args
 			this.setGlobalScrollEmbeds(res, this.embeds.image, 20)
 			this.lastMessage.channel.send(this.globalScrollEmbeds[0]).then((sentMessage) => {
 				this.globalScrollUpdateMessage = sentMessage
 			});
 		})
-		.catch((err) => this.errHandler(err))
+		.catch((err) => this.errorHandler(err))
 	}
 
 }
