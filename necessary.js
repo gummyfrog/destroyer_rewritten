@@ -4,7 +4,7 @@ var path = require('path');
 var json = require('jsonfile');
 // var appDir = path.dirname(require.main.filename);
 
-module.exports = class Manager {
+module.exports = class Necessary {
 	constructor() {
 		this.codes = json.readFileSync('../codes/destroyer/code.json');
 		this.config = json.readFileSync('config.json');

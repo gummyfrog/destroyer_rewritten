@@ -1,6 +1,6 @@
-var Manager = require('./manager.js')
+var Necessary = require('./necessary.js')
 
-module.exports = class quoteManager extends Manager {
+module.exports = class quoteManager extends Necessary {
 
 	constructor() {
 		super();

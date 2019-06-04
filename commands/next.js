@@ -1,9 +1,9 @@
 module.exports = {
 	name: 'n',
 	description: 'Next!',
-	required: ["searcher"],
+	required: ["scroll"],
 	execute(message, args, managers = {}) {
-		managers.searcher.getOffsetGlobalScrollIndex(1);
+		managers.scroll.getOffsetGlobalScrollIndex(1);
 		message.delete()
 	},
 };

@@ -11,36 +11,43 @@ var fs = require('fs');
 // var download = require('image-downloader')
 // var total = json.readFileSync('./total.json');
 
-var Updater = require('./updater.js')
+var Updater = require('./updater.js');
 var QuoteManager = require('./quoteManager.js');
 var SearchManager = require('./searchManager.js');
-var Manager = require('./manager.js')
+var ScrollManager = require('./ScrollManager.js');
+var Necessary = require('./necessary.js');
 
-
-var google = require('google')
-google.resultsPerPage = 5;
-
-class Destroyer extends Manager {
+class Destroyer extends Necessary {
 
 	constructor() {
 		console.log("Making new Destroyer")
 
 		super();
 		this.client = new Discord.Client();
-		this.client.commands = new Discord.Collection();
+		this.commands = new Discord.Collection();
 		this.managers = new Discord.Collection();
+		this.help = {};
 
 
 		this.updater = new Updater({name: "Jordan 2.0", desc: "it's jordan! 2.0! now with better updater."});
 		this.quotes = new QuoteManager();
+		this.scroll = new ScrollManager();
 		this.searcher = new SearchManager();
+
+		// manager is not a good name for these
 
 		this.managers.set("quotes", this.quotes);
 		this.managers.set("searcher", this.searcher);
+		this.managers.set("scroll", this.scroll);
+		this.managers.set("embeds", this.embeds);
+		this.managers.set("stats", this.stats);
+		this.managers.set("config", this.config)
+		this.managers.set("help", this.help)
 
 		fs.readdirSync('./commands').filter(file => file.endsWith('.js')).map((file) => {
 			var command = require(`./commands/${file}`);
-			this.client.commands.set(command.name, command);
+			this.commands.set(command.name, command);
+			this.help[command.name] = `${command.description}`
 		});
 
 		this.client.on("ready", () => {
@@ -81,8 +88,6 @@ class Destroyer extends Manager {
 				return; 
 			}
 
-			console.log(opt);
-
 			var voteEmbed = this.embeds.vote();
 			this.searcher.lastMessage.channel.send(voteEmbed).then((votingMessage) => {
 				// this makes the order of the reactions kind of random, hehe
@@ -120,7 +125,6 @@ class Destroyer extends Manager {
 		if(!process.env.DEBUG && message.guild.id == "352103491948511233") return;
 
 		var command = message.content.toLowerCase().substring(prefix.length).split(' ')[0];
-		console.log(command)
 		var args = message.content.toLowerCase().substring(prefix.length + command.length + 1).toLowerCase();  
 		var author = message.author;
 
@@ -134,10 +138,8 @@ class Destroyer extends Manager {
 			this.stats.trackStat("messager", author)
 		}	
 
-
-
-		if (!this.client.commands.has(command)) return;
-		var toExecute = this.client.commands.get(command);
+		if (!this.commands.has(command)) return;
+		var toExecute = this.commands.get(command);
 
 		this.waitForVote({prerequisite: (toExecute.blacklisted && this.checkWordsForBlacklist(args))})
 		.then(res => {
@@ -160,75 +162,6 @@ class Destroyer extends Manager {
 			this.errorHandler(err);
 		});
 
-
-
-		// put anything that belongs behind the blacklist here, mostly just searches (yt, images, google, probably exclude urban.)
-		// this.waitForVote({prerequisite: this.checkWordsForBlacklist(args)})
-		// .then(res => {
-		// 	if(["s", "search"].includes(command)) {
-		// 		this.searcher.search(args);
-				// this.stats.trackStat("searched", author)
-		// 		this.stats.trackStat("commands", "search")
-		// 	}
-
-		// 	if(["ys", "youtube"].includes(command)) {
-		// 		this.searcher.ytSearch(args);
-		// 		this.stats.trackStat("youtubed", author)
-		// 		this.stats.trackStat("commands", "youtube")
-		// 	}
-
-		// 	if(["gif", "g"].includes(command)) {
-		// 		this.searcher.giphySearch(args);
-		// 		this.stats.trackStat("gifs", author)
-		// 		this.stats.trackStat("commands", "gifs")
-		// 	}
-		// })
-		// .catch((err) => {
-		// 	if(err != "Downvoted to hell") {
-		// 		this.errHandler(err)
-		// 	};
-		// });
-
-
-
-		// // these are all fine and are not checked against the blacklist
-
-
-		// if(["h", "help"].includes(command)) {
-		// 	message.channel.send(this.embeds.help(this.config.help));
-		// 	message.channel.send(this.embeds.alert("Confirmed, this feature is working."))
-		// }
-
-		// if(["q", "quote"].includes(command)) {
-		// 	this.quotes.findMessage(message, args);
-		// 	this.stats.trackStat("commands", "quote")
-		// }
-
-		// if(["sk", "skip"].includes(command)) {
-		// 	var i = 1;
-		// 	if(args != null) {i = parseInt(args);}
-		// 	this.searcher.getOffsetGlobalScrollIndex(i);
-		// }
-
-		// if(["c", "config"].includes(command)) {
-		// 	message.channel.send(this.embeds.config(this.config));
-		// }
-
-		// if(["st", "status"].includes(command)) {
-		// 	this.updater.get()
-		// 	.then(res => {
-		// 		message.channel.send(this.embeds.status(res));
-		// 	})
-		// 	.catch((err) => this.errHandler(err))
-		// }
-
-		// if(["l", "leaderboard"].includes(command)) {
-		// 	if(args != "") {
-		// 		message.channel.send(this.embeds.leaderboard(args, this.stats.getLeaderboard(args)));
-		// 	} else {
-		// 		message.channel.send(this.embeds.leaderboardList(this.stats.getStatNames()))
-		// 	}
-		// }
 
 		// add a change config command;
 	}

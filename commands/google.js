@@ -1,10 +1,10 @@
 module.exports = {
-	name: 'ys',
-	description: 'YouTube!',
+	name: 'gs',
+	description: 'Google Search!',
 	blacklisted: true,
 	required: ["searcher"],
 	execute(message, args, managers = {}) {
-		managers.searcher.ytSearch(message, args);
+		managers.searcher.googleSearch(message, args);
 	},
 };
 

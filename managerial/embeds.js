@@ -224,6 +224,7 @@ module.exports = class embeds {
 	}
 
 	config(configObject) {
+		console.log(configObject);
 		var embed = this.arbitraryObjectDisplay(configObject);
 		embed.title = "Config";
 		return({"embed":embed});
