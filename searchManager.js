@@ -56,10 +56,9 @@ module.exports = class search extends Necessary {
 
 
 	giphySearch(message, args, scroll) {
-		console.log(args);
 		this.giphy.search(args)
 		.then((res) => {
-			if(res.length == 0) {
+			if(res.data.length == 0) {
 				message.channel.send(this.embeds.alert("No results found."))
 				return;
 			}

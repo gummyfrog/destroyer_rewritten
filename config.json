@@ -1,15 +1,1 @@
-{
-	"blacklist": ["nsfw", "sexy", "furry", "gore", "hentai", "boob", "tit", "ass", "cum", "dick", "penis", "vagina", "porn", "foot", "feet", "toes", "pussy"],
-	"pos": "👁",
-	"neg": "😒",
-	"deletevotes": false,
-	"voting": false,
-	"colors": {
-			"quote" : 6482943,
-			"leaderboard": 16763981, 
-			"list": 8640595, 
-			"video": 10041553,
-			"image": 14707627,
-			"warn": 16728663
-	}
-}
+{"prefix":"d!","blacklist":["nsfw","sexy","furry","gore","hentai","boob","tit","ass","cum","dick","penis","vagina","porn","foot","feet","toes","pussy","hello"],"pos":"🐎","neg":"😒","deletevotes":false,"voting":true,"colors":{"quote":6482943,"leaderboard":16763981,"list":8640595,"video":10041553,"image":14707627,"warn":16728663}}

@@ -1,4 +1,3 @@
-var prefix = "d!"
 var Discord = require("discord.js");
 var nodeCleanup = require('node-cleanup');
 var colors = require('colors');
@@ -41,7 +40,9 @@ class Destroyer extends Necessary {
 		this.managers.set("scroll", this.scroll);
 		this.managers.set("embeds", this.embeds);
 		this.managers.set("stats", this.stats);
-		this.managers.set("config", this.config)
+		this.managers.set("getConfig", this.getConfig)
+		this.managers.set("setConfig", this.setConfig)
+
 		this.managers.set("help", this.help)
 
 		fs.readdirSync('./commands').filter(file => file.endsWith('.js')).map((file) => {
@@ -66,16 +67,16 @@ class Destroyer extends Necessary {
 	};
 
 	checkWordsForBlacklist(words) {
-		return words.split(' ').some((e) => {return this.config.blacklist.includes(e)});
+		return words.split(' ').some((e) => {return this.getConfig().blacklist.includes(e)});
 	}
 
-	waitForVote(passOpt = {}) {
+	waitForVote(message, passOpt = {}) {
 		return new Promise((resolve, reject) => {
 			var opt = Object.assign({
 				res: 3,
 				rej: 2,
-				pos: this.config.pos,
-				neg: this.config.neg,
+				pos: this.getConfig().pos,
+				neg: this.getConfig().neg,
 				prerequisite: true,
 			}, passOpt)
 
@@ -89,7 +90,7 @@ class Destroyer extends Necessary {
 			}
 
 			var voteEmbed = this.embeds.vote();
-			this.searcher.lastMessage.channel.send(voteEmbed).then((votingMessage) => {
+			message.channel.send(voteEmbed).then((votingMessage) => {
 				// this makes the order of the reactions kind of random, hehe
 				votingMessage.react(opt.pos).then((res) => {
 					votingMessage.react(opt.neg)
@@ -105,7 +106,7 @@ class Destroyer extends Necessary {
 					} else if(r.emoji.name === opt.neg && r.users.size == opt.rej) {
 						// reject
 
-						if(this.config.deletevotes) {
+						if(this.getConfig().deletevotes) {
 							votingMessage.delete();
 						} else {
 							votingMessage.edit(this.embeds.cancelledVote(69));
@@ -120,12 +121,12 @@ class Destroyer extends Necessary {
 
 	commandHandler(message) {
 		if(message.author.id === this.client.user.id) return;
-		if(message.content.substring(0, prefix.length).toLowerCase() != prefix) return;
+		if(message.content.substring(0, this.getConfig().prefix.length).toLowerCase() != this.getConfig().prefix) return;
 		if(process.env.DEBUG && message.guild.id != "352103491948511233") return;
 		if(!process.env.DEBUG && message.guild.id == "352103491948511233") return;
 
-		var command = message.content.toLowerCase().substring(prefix.length).split(' ')[0];
-		var args = message.content.toLowerCase().substring(prefix.length + command.length + 1).toLowerCase();  
+		var command = message.content.toLowerCase().substring(this.getConfig().prefix.length).split(' ')[0];
+		var args = message.content.toLowerCase().substring(this.getConfig().prefix.length + command.length + 1).toLowerCase();  
 		var author = message.author;
 
 		if(message.guild === null) {
@@ -141,7 +142,7 @@ class Destroyer extends Necessary {
 		if (!this.commands.has(command)) return;
 		var toExecute = this.commands.get(command);
 
-		this.waitForVote({prerequisite: (toExecute.blacklisted && this.checkWordsForBlacklist(args))})
+		this.waitForVote(message, {prerequisite: (toExecute.blacklisted && this.getConfig().voting && this.checkWordsForBlacklist(args))})
 		.then(res => {
 			try {
 				var requiredObject = {};

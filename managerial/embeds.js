@@ -35,7 +35,7 @@ module.exports = class embeds {
 					value = `Sub-Object with ${Object.keys(object[key]).length} keys.`;
 				}
 
-				ret += (value + '\n');
+				ret += (value + ', ');
 			}
 		}
 
