@@ -1,6 +1,7 @@
 module.exports = {
-	name: 's',
-	description: 'Search!',
+	name: 'Search',
+	description: 'Performs a Google Images search.',
+	key: 's',
 	blacklisted: true,
 	required: ["searcher", "scroll"],
 	execute(message, args, managers = {}) {

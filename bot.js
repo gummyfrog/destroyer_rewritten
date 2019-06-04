@@ -46,8 +46,8 @@ class Destroyer extends Necessary {
 
 		fs.readdirSync('./commands').filter(file => file.endsWith('.js')).map((file) => {
 			var command = require(`./commands/${file}`);
-			this.commands.set(command.name, command);
-			this.help[command.name] = `${command.description}`
+			this.commands.set(command.key, command);
+			this.help[`${command.name} **(${command.key})**`] = `⮑ ${command.description}`
 		});
 
 		this.client.on("ready", () => {

@@ -1,6 +1,7 @@
 module.exports = {
-	name: 'ys',
-	description: 'YouTube!',
+	name: 'YouTube Search',
+	description: 'Looks for a YouTube video.',
+	key: 'ys',
 	blacklisted: true,
 	required: ["searcher"],
 	execute(message, args, managers = {}) {
