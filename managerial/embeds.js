@@ -1,4 +1,4 @@
-module.exports = class embedManager {
+module.exports = class embeds {
 
 	constructor(opt = {}) {
 		this.colors = Object.assign({
@@ -9,7 +9,6 @@ module.exports = class embedManager {
 			image: 14707627, // #e06bab
 			warn: 16728663, // #B52F49
 		}, opt);
-		console.log(this.colors);
 
 		this.quote = this.quote.bind(this);
 		this.image = this.image.bind(this);
@@ -225,6 +224,7 @@ module.exports = class embedManager {
 	}
 
 	config(configObject) {
+		console.log(configObject);
 		var embed = this.arbitraryObjectDisplay(configObject);
 		embed.title = "Config";
 		return({"embed":embed});

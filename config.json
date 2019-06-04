@@ -4,16 +4,12 @@
 	"neg": "😒",
 	"deletevotes": false,
 	"voting": false,
-	"help": {
-		"HELP\n_h or help_": "That's this page. I hope it's helpful.",
-		"_c or config_": "Shows you Jordy's settings at the moment. This will be configurable. Soon.",
-		"SEARCH\n_s or search_": "Searches for images on Google.\nThe default page is 1.\nEach page contains 10 images to scroll through.",
-		"_p or page_": "Changes the page of the current search.",
-		"SCROLLING\n_b or n / back or next_": "Scrolls through the current scroll list.",
-		"\n_s or skip_": "Skips ahead in the scroll list by X.",
-		"QUOTING\n_q or quote_": "Archives a message. Use this handy guide to know exactly what argument to pass:\nMention a user to quote their latest message.\nPreface a Message's ID with 'i' to quote a message by ID.\nProvide a phrase or word that was used in the desired message to locate it."
-	},
-	"facts": {
-		
+	"colors": {
+			"quote" : 6482943,
+			"leaderboard": 16763981, 
+			"list": 8640595, 
+			"video": 10041553,
+			"image": 14707627,
+			"warn": 16728663
 	}
 }
