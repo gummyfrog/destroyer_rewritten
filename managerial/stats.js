@@ -3,7 +3,8 @@ var json = require('jsonfile');
 module.exports = class stats { 
 
 	constructor() {
-		this.stats = json.readFileSync('./stats.json');
+		// this.stats = json.readFileSync('./stats.json');
+		this.stats = {};
 	}
 
  	trackStat(stat, who, value = 1) {

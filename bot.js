@@ -134,7 +134,7 @@ class Destroyer extends Necessary {
 			return;
 		} else {
 			console.log(`From "${message.guild.name}"`.green);
-			this.stats.trackStat("messager", author)
+			// this.stats.trackStat("messager", author)
 		}	
 
 		if (!this.commands.has(command)) return;
