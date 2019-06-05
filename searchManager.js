@@ -17,6 +17,7 @@ module.exports = class search extends Necessary {
 	}
 
 	imageSearch(message, args, scroll) {	
+		if(args == "") return;
 		this.imgClient.search(args, {page: 1})
 		.then((images) => {
 			if(images.length == 0) {
@@ -55,6 +56,7 @@ module.exports = class search extends Necessary {
 
 
 	giphySearch(message, args, scroll) {
+		if(args==null) return;
 		this.giphy.search(args)
 		.then((res) => {
 			if(res.data.length == 0) {
