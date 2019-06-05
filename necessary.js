@@ -23,22 +23,42 @@ module.exports = class Necessary {
 	}
 
 	setConfig(where, what, config) {
-		if(config[where] == undefined) return
+		console.log(where);
+		console.log(what);
+		var exists = where;
+		if(where.split('.').length > 0) {
+			exists = where.split('.')[0]
+		};
 
-		switch(typeof(config[where])) {
+		console.log(exists);
+
+		if(config[exists] == undefined) {
+			console.log('does not exist.');
+			return
+		};
+
+
+		switch(typeof(config[exists])) {
 			case "string": 
-				config[where] = what;
+				config[exists] = what;
 				break;
 			case "boolean":
-				config[where] = what.toLowerCase() == 'true' ? true : false;
+				config[exists] = what.toLowerCase() == 'true' ? true : false;
 				break;
 			case "object":
-				if(config[where].constructor === Array) {
+				if(config[exists].constructor === Array) {
 					if(what == '-') {
-						config[where].pop();
+						config[exists].pop();
 					} else {
-						config[where].push(what);
+						config[exists].push(what);
 					}
+				} else {
+					var split = where.split('.');
+					console.log(split);
+					console.log(config[split[0]][split[1]])
+					if(config[split[0]][split[1]] != undefined) {
+						config[split[0]][split[1]] = what;
+					};
 				}
 				break;
 			default:

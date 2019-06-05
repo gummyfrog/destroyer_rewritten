@@ -8,13 +8,12 @@ module.exports = class search extends Necessary {
 		this.imgClient = new GoogleImages(this.codes.CSE, this.codes.API);
 		this.giphy = require('giphy-api')(this.codes.GIPHY)
 		this.youtubeSearch = require('youtube-search-promise');
-		this.google = require('google')
-		this.google.resultsPerPage = 5;
+		// this.google = require('google')
+		// this.google.resultsPerPage = 5;
 		this.yt_opts = {
 			maxResults: 8,
 			key: this.codes.YT,
 		};
-
 	}
 
 	imageSearch(message, args, scroll) {	

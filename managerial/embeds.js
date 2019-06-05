@@ -1,6 +1,14 @@
 module.exports = class embeds {
 
 	constructor(opt = {}) {
+		this.colors = {};
+		this.refresh(opt);
+		this.quote = this.quote.bind(this);
+		this.image = this.image.bind(this);
+		this.video = this.video.bind(this);
+	}
+
+	refresh(config) {
 		this.colors = Object.assign({
 			quote: 6482943, // #62EBFF
 			leaderboard: 16763981, // #ffcc4d
@@ -8,12 +16,9 @@ module.exports = class embeds {
 			video: 10041553, // #9938D1
 			image: 14707627, // #e06bab
 			warn: 16728663, // #B52F49
-		}, opt);
-
-		this.quote = this.quote.bind(this);
-		this.image = this.image.bind(this);
-		this.video = this.video.bind(this);
+		}, config);
 	}
+
 
 	monocolor(color) {
 		for(var k=0; k<Object.keys(this.colors).length;k++) {
@@ -35,8 +40,23 @@ module.exports = class embeds {
 					value = `Sub-Object with ${Object.keys(object[key]).length} keys.`;
 				}
 
-				ret += (value + ', ');
+				ret += (`**${key}**: ${value}\n`);
 			}
+		}
+
+		return ret;
+	}
+
+	arrayLoop(array) {
+		var ret = "";
+		for(var i=0;i<array.length;i++) {
+			var value = array[i];
+			if(typeof(value) == "object") {
+				// implement redundancy for trees?
+				value = `Sub-Object with ${Object.keys(object[key]).length} keys.`;
+			}
+
+			ret += (value + ', ')
 		}
 
 		return ret;
@@ -54,11 +74,11 @@ module.exports = class embeds {
 			var value = object[key];
 
 			if(typeof(value) == "object") {
-				// implement redundancy for trees?
-				// value = `Object with ${Object.keys(object[key]).length} keys.`;
-				value = this.objLoop(value, exclude);
-			} else if (typeof(value) == "array") {
-				value = `Array with ${object[key].length} items.`;
+				if (value.constructor === Array) {
+					value = this.arrayLoop(value);
+				} else {
+					value = this.objLoop(value, exclude);
+				}
 			}
 
 			embed.fields.push({

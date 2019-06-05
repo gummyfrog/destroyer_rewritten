@@ -91,10 +91,8 @@ class Destroyer extends Necessary {
 
 			var voteEmbed = this.embeds.vote();
 			message.channel.send(voteEmbed).then((votingMessage) => {
-				// this makes the order of the reactions kind of random, hehe
-				votingMessage.react(opt.pos).then((res) => {
-					votingMessage.react(opt.neg)
-				});
+				votingMessage.react(opt.pos).then((res) => {votingMessage.react(opt.neg)});
+				
 				const collector = votingMessage.createReactionCollector((reaction, user) => 
 					[opt.pos, opt.neg].includes(reaction.emoji.name), { time: 0 });
 				collector.on('collect', (r) => {

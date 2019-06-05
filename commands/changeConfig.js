@@ -5,7 +5,7 @@ module.exports = {
 	required: ["embeds", "setConfig", "getConfig"],
 	execute(message, args, managers = {}) {
 		if(args != "") {
-			var split = args.split(' ');
+			var split = args.split('=');
 			var where = split.shift();
 			var what = split.join(' ');
 			managers.setConfig(where, what, managers.getConfig());
