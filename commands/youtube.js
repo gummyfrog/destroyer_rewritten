@@ -5,7 +5,7 @@ module.exports = {
 	blacklisted: true,
 	required: ["searcher", "scroll"],
 	execute(message, args, managers = {}) {
-		managers.searcher.ytSearch(message, args, scroll);
+		managers.searcher.ytSearch(message, args, maagers.scroll);
 	},
 };
 

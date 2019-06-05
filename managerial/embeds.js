@@ -19,7 +19,6 @@ module.exports = class embeds {
 		}, config);
 	}
 
-
 	monocolor(color) {
 		for(var k=0; k<Object.keys(this.colors).length;k++) {
 			var key = Object.keys(this.colors)[k]
@@ -61,7 +60,6 @@ module.exports = class embeds {
 
 		return ret;
 	}
-
 
 	arbitraryObjectDisplay(object, exclude = []) { 
 		var embed = {
