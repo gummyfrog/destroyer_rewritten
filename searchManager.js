@@ -33,7 +33,7 @@ module.exports = class search extends Necessary {
 				scroll.globalScrollUpdateMessage = sentMessage;
 			});
 		})
-		.catch((err) => this.errorHandler(err, sentMessage))
+		.catch((err) => this.errorHandler(err, message))
 	}
 
 	ytSearch(message, args, scroll) {
