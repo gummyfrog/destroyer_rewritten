@@ -1,8 +1,6 @@
 var GoogleImages = require('google-images');
 var Necessary = require('./necessary.js');
 var axios = require('axios');
-var Google = require('google');
-Google.resultsPerPage = 20;;
 
 module.exports = class search extends Necessary {
 
@@ -12,8 +10,6 @@ module.exports = class search extends Necessary {
 		this.giphy = require('giphy-api')(this.codes.GIPHY)
 		this.gapi = this.codes.GAPI
 		this.youtubeSearch = require('youtube-search-promise');
-		// this.google = require('google')
-		// this.google.resultsPerPage = 5;
 		this.yt_opts = {
 			maxResults: 8,
 			key: this.codes.YT,
@@ -36,7 +32,7 @@ module.exports = class search extends Necessary {
 				scroll.globalScrollUpdateMessage = sentMessage;
 			});
 		})
-		.catch((err) => this.errorHandler(err, message))
+		.catch((err) => this.errorHandler(err, sentMessage))
 	}
 
 	ytSearch(message, args, scroll) {
@@ -85,6 +81,7 @@ module.exports = class search extends Necessary {
 		axios.get(url)
 		.then((res) => {
 			console.log(res);
+			message.channel.send(res);
 		}) 
 		.catch((err) => this.errorHandler(err, message))
 	}
