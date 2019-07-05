@@ -66,8 +66,8 @@ class Destroyer extends Necessary {
 		this.client.login(this.codes.token);
 	};
 
-	checkWordsForBlacklist(words) {
-		return words.split(' ').some((e) => {return this.getConfig().blacklist.includes(e)});
+	checkWordsForBlacklist(words) {	
+		return words.split(' ').some((e) => {return this.getConfig().blacklist.includes(e) || this.getConfig().blacklist.includes(words)});
 	}
 
 	waitForVote(message, passOpt = {}) {

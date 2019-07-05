@@ -1,5 +1,8 @@
 var GoogleImages = require('google-images');
-var Necessary = require('./necessary.js')
+var Necessary = require('./necessary.js');
+var axios = require('axios');
+var Google = require('google');
+Google.resultsPerPage = 20;;
 
 module.exports = class search extends Necessary {
 
@@ -7,6 +10,7 @@ module.exports = class search extends Necessary {
 		super();
 		this.imgClient = new GoogleImages(this.codes.CSE, this.codes.API);
 		this.giphy = require('giphy-api')(this.codes.GIPHY)
+		this.gapi = this.codes.GAPI
 		this.youtubeSearch = require('youtube-search-promise');
 		// this.google = require('google')
 		// this.google.resultsPerPage = 5;
@@ -32,7 +36,7 @@ module.exports = class search extends Necessary {
 				scroll.globalScrollUpdateMessage = sentMessage;
 			});
 		})
-		.catch((err) => this.errorHandler(err))
+		.catch((err) => this.errorHandler(err, message))
 	}
 
 	ytSearch(message, args, scroll) {
@@ -51,7 +55,7 @@ module.exports = class search extends Necessary {
 				scroll.globalScrollUpdateMessage = sentMessage
 			});
 		})
-		.catch((err) => this.errorHandler(err))
+		.catch((err) => this.errorHandler(err, message))
 	}	
 
 
@@ -72,30 +76,17 @@ module.exports = class search extends Necessary {
 				scroll.globalScrollUpdateMessage = sentMessage
 			});
 		})
-		.catch((err) => this.errorHandler(err))
+		.catch((err) => this.errorHandler(err, message))
 	}
 
-	// googleSearch(message, args) {
-	// 	var nextCounter = 0;
-
-	// 	this.google(args, (err, res) => {
-	// 		if(err) this.errorHandler(err);
-
-	// 		console.log(Object.keys(res));
-	// 		console.log(res.links.length);
-	// 		console.log(res.links)
-
-	// 		for(var i=0; i < res.links.length; i++) {
-	// 			var link = res.links[i];
-	// 			console.log(link.title + ' - ' + link.href)
-	// 			console.log(link.description + "\n")
-	// 		}
-
-	// 		if(nextCounter < 4) {
-	// 			nextCounter+= 1
-	// 			if(res.next) res.next()
-	// 		}
-	// 	})
-	// }
+	googleSearch(message, args, scroll) {
+		var url = (`https://www.googleapis.com/customsearch/v1?cx=destroyer-additional-search?key=${this.gapi}&q=${args}`)
+		console.log(url);
+		axios.get(url)
+		.then((res) => {
+			console.log(res);
+		}) 
+		.catch((err) => this.errorHandler(err, message))
+	}
 
 }
