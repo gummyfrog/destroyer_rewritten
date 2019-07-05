@@ -29,6 +29,7 @@ module.exports = class search extends Necessary {
 			
 			scroll.setGlobalScrollEmbeds(args, images, this.embeds.image, 20) // make this a setting!
 			message.channel.send(scroll.globalScrollEmbeds[0]).then((sentMessage) => {
+				console.log(sentMessage);
 				scroll.globalScrollUpdateMessage = sentMessage;
 			});
 		})
