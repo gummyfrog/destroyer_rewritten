@@ -6,11 +6,12 @@ module.exports = class quoteManager extends Necessary {
 		super();
 	}
 
-	findMessage(message, args) {
+	findMessage(message, args, updater) {
 		var archiveChannel = message.guild.channels.find((channel) => channel.name.toLowerCase().includes("archive"));
 		var messages = message.channel.messages.array().reverse();
 		var searchedMsg;
 		var eMsg = "Couldn't find anything.";
+
 
 		if(archiveChannel == undefined) {
 			eMsg = "Couldn't find the archive channel."
@@ -36,8 +37,22 @@ module.exports = class quoteManager extends Necessary {
 			message.channel.send("Ok, here's the quote.", this.embeds.quote(searchedMsg))
 			archiveChannel.send(this.embeds.quote(searchedMsg));
 
-			this.stats.trackStat("quoting", message.author);
-			this.stats.trackStat("quoted", searchedMsg.author);
+			var quoteData = {
+				name: searchedMsg.author.username,
+				message: searchedMsg.content,
+				attachments: searchedMsg.attachments,
+				channelname: searchedMsg.channel.name,
+				time: searchedMsg.createdTimestamp,
+				avatar: searchedMsg.author.avatarURL,
+			}
+
+			console.log(quoteData);
+			console.log(updater.name);
+
+			// this.stats.trackStat("quoting", message.author);
+			// this.stats.trackStat("quoted", searchedMsg.author);
+
+			updater.quote(quoteData);
 
 		} else {
 			message.channel.send(this.embeds.alert(eMsg))

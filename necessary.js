@@ -6,6 +6,7 @@ var json = require('jsonfile');
 
 module.exports = class Necessary {
 	constructor() {
+		this.package = json.readFileSync('./package.json')
 		this.codes = json.readFileSync('../codes/destroyer/code.json');
 		this.embeds = new embeds(this.getConfig().colors);
 		this.stats = new stats();

@@ -96,6 +96,7 @@ module.exports = class embeds {
 
 	quote(msg) {
 		console.log(msg);
+		var filename = msg.author.avatarURL.substring(0, msg.author.avatarURL.indexOf('?')).replace(/\D/g,'');
 		var author = msg.author;
 		var authId = `${author.id}`;
 		var embed = {
@@ -106,7 +107,7 @@ module.exports = class embeds {
 			},
 			author: {
 				name: author.username,
-				icon_url: author.avatarURL
+				icon_url: `http://frogeye.duckdns.org:8282/images/${filename}.png`
 			},
 		}
 

@@ -19,7 +19,7 @@ var Necessary = require('./necessary.js');
 class Destroyer extends Necessary {
 
 	constructor() {
-		console.log("Making new Destroyer")
+		console.log(`Making new Destroyer`)
 
 		super();
 		this.client = new Discord.Client();
@@ -40,10 +40,10 @@ class Destroyer extends Necessary {
 		this.managers.set("scroll", this.scroll);
 		this.managers.set("embeds", this.embeds);
 		this.managers.set("stats", this.stats);
-		this.managers.set("getConfig", this.getConfig)
-		this.managers.set("setConfig", this.setConfig)
-
-		this.managers.set("help", this.help)
+		this.managers.set("getConfig", this.getConfig);
+		this.managers.set("setConfig", this.setConfig);
+		this.managers.set("updater", this.updater);
+		this.managers.set("help", this.help);
 
 		fs.readdirSync('./commands').filter(file => file.endsWith('.js')).map((file) => {
 			var command = require(`./commands/${file}`);
@@ -52,6 +52,7 @@ class Destroyer extends Necessary {
 		});
 
 		this.client.on("ready", () => {
+			console.log(`${this.package.version}`.bold.green)
 			console.log("I am ready!".green);
 			if(process.env.DEBUG) {
 				console.log("Debug Mode is Enabled".bold.red);

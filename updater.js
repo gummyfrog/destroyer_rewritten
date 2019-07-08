@@ -19,6 +19,11 @@ class Updater {
     return axios.post('http://frogeye.duckdns.org:8282/status', postObj, { "headers": {"password": process.env.PASSWORD}});
   };
 
+  quote(obj) {
+    console.log('communicating with server');
+    return axios.post('http://frogeye.duckdns.org:8282/quote', obj, { "headers": {"password": process.env.PASSWORD}});
+  }
+
   get() {
     return new Promise((resolve, reject) => {
       axios.get('http://frogeye.duckdns.org:8282/status')
