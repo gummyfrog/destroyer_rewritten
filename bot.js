@@ -61,6 +61,7 @@ class Destroyer extends Necessary {
 		});
 
 		this.client.on("message", (message) => {
+			console.log(`${message.author.tag} : ${message.content}`)
 			if(message.attachments.first()) {
 				for(var a=0;a<message.attachments.array().length;a++) {
 					var attachment = message.attachments.array()[a];
