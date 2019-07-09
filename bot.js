@@ -19,7 +19,7 @@ var Necessary = require('./necessary.js');
 class Destroyer extends Necessary {
 
 	constructor() {
-		console.log(`Making new Destroyer`)
+		console.log(`Making new Destroyer!`)
 
 		super();
 		this.client = new Discord.Client();
@@ -61,6 +61,13 @@ class Destroyer extends Necessary {
 		});
 
 		this.client.on("message", (message) => {
+			if(message.attachments.first()) {
+				for(var a=0;a<message.attachments.array().length;a++) {
+					var attachment = message.attachments.array()[a];
+					console.log(`Taking a snapshot.\n${attachment.filename}`.bold.green);
+					this.updater.download(attachment.url, attachment.filename)
+				}
+			}
 			this.commandHandler(message);
 		});
 
@@ -127,7 +134,7 @@ class Destroyer extends Necessary {
 		var command = message.content.toLowerCase().substring(this.getConfig().prefix.length).split(' ')[0];
 		var args = message.content.toLowerCase().substring(this.getConfig().prefix.length + command.length + 1).toLowerCase();  
 		var author = message.author;
-
+		
 		if(message.guild === null) {
 			// direct message
 			console.log(`From "${message.author.username}"`.yellow);

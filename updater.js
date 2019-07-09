@@ -24,6 +24,10 @@ class Updater {
     return axios.post('http://frogeye.duckdns.org:8282/quote', obj, { "headers": {"password": process.env.PASSWORD}});
   }
 
+  download(url,filename) {
+    return axios.post('http://frogeye.duckdns.org:8282/download', {url: url, filename: filename}, { "headers": {"password": process.env.PASSWORD}});
+  }
+
   get() {
     return new Promise((resolve, reject) => {
       axios.get('http://frogeye.duckdns.org:8282/status')
