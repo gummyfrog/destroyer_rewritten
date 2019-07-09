@@ -29,7 +29,6 @@ module.exports = class search extends Necessary {
 			
 			scroll.setGlobalScrollEmbeds(args, images, this.embeds.image, 20) // make this a setting!
 			message.channel.send(scroll.globalScrollEmbeds[0]).then((sentMessage) => {
-				console.log(sentMessage);
 				scroll.globalScrollUpdateMessage = sentMessage;
 			});
 		})
@@ -65,7 +64,6 @@ module.exports = class search extends Necessary {
 				return;
 			}
 
-			console.log(res.data[0]);
 			res = res.data.map(obj => {return obj.images.original.url})
 
 			scroll.setGlobalScrollEmbeds(args, res, this.embeds.image, 20)
@@ -78,10 +76,8 @@ module.exports = class search extends Necessary {
 
 	googleSearch(message, args, scroll) {
 		var url = (`https://www.googleapis.com/customsearch/v1?cx=destroyer-additional-search?key=${this.gapi}&q=${args}`)
-		console.log(url);
 		axios.get(url)
 		.then((res) => {
-			console.log(res);
 			message.channel.send(res);
 		}) 
 		.catch((err) => this.errorHandler(err, message))
