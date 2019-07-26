@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'Gif Search',
 	description: 'Searches for a gif.',
-	key: 'gif',
+	keys: ['g', 'gif'],
 	blacklisted: true,
 	required: ["searcher", "scroll"],
 	execute(message, args, managers = {}) {

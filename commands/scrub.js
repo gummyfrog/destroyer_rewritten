@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'Scrub',
 	description: 'Shows a specific entry in the results list.',
-	key: 'sc',
+	keys: ['sc', 'scrub'],
 	required: ["scroll"],
 	execute(message, args, managers = {}) {
 		var i = 1;

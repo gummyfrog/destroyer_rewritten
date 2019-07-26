@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'Back',
 	description: 'Scrolls the results list backwards.',
-	key: 'b',
+	keys: ['b', 'back'],
 	required: ["scroll"],
 	execute(message, args, managers = {}) {
 		managers.scroll.getOffsetGlobalScrollIndex(-1);

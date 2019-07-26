@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'Change Config',
 	description: 'Messes with the config.',
-	key: 'cf',
+	keys: ['cf', 'changeConfig'],
 	required: ["embeds", "setConfig", "getConfig"],
 	execute(message, args, managers = {}) {
 		if(args != "") {

@@ -13,7 +13,8 @@ var fs = require('fs');
 var Updater = require('./updater.js');
 var QuoteManager = require('./quoteManager.js');
 var SearchManager = require('./searchManager.js');
-var ScrollManager = require('./ScrollManager.js');
+var ScrollManager = require('./scrollManager.js');
+var TranslateManager = require('./translateManager.js');
 var Necessary = require('./necessary.js');
 
 class Destroyer extends Necessary {
@@ -32,11 +33,13 @@ class Destroyer extends Necessary {
 		this.quotes = new QuoteManager();
 		this.scroll = new ScrollManager();
 		this.searcher = new SearchManager();
+		this.translator = new TranslateManager();
 
 		// manager is not a good name for these
 
 		this.managers.set("quotes", this.quotes);
 		this.managers.set("searcher", this.searcher);
+		this.managers.set("translator", this.translator);
 		this.managers.set("scroll", this.scroll);
 		this.managers.set("embeds", this.embeds);
 		this.managers.set("stats", this.stats);
@@ -47,8 +50,10 @@ class Destroyer extends Necessary {
 
 		fs.readdirSync('./commands').filter(file => file.endsWith('.js')).map((file) => {
 			var command = require(`./commands/${file}`);
-			this.commands.set(command.key, command);
-			this.help[`${command.name} **(${command.key})**`] = `⮑ ${command.description}`
+			for(var k=0; k<command.keys.length;k++) {
+				this.commands.set(command.keys[k], command);
+			}
+			this.help[`${command.name} **(${command.keys.join(' or ')})**`] = `⮑ ${command.description}`
 		});
 
 		this.client.on("ready", () => {

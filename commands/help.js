@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'Help',
 	description: 'Lists all commands.',
-	key: 'h',
+	keys: ['h', 'help'],
 	required: ["embeds", "help"],
 	execute(message, args, managers = {}) {
 		message.channel.send(managers.embeds.help(managers.help));

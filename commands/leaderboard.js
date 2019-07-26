@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'Leaderboard',
 	description: 'Shows the stat leaderboard.',
-	key: 'l',
+	keys: ['l', 'leaderboard'],
 	required: ["embeds", "stats"],
 	execute(message, args, managers = {}) {
 		if(args != "") {

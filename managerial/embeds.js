@@ -242,6 +242,16 @@ module.exports = class embeds {
 		return({"embed":embed})
 	}
 
+	translation(original, res) {
+		var embed = {
+			title: `${original}`,
+			description: `**⮑ ${res}**`,
+			color: this.colors.list
+		}
+
+		return({"embed":embed});
+	}
+
 	config(configObject) {
 		console.log(configObject);
 		var embed = this.arbitraryObjectDisplay(configObject);

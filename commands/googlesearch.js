@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'Google Search',
 	description: 'Performs a Google search.',
-	key: 'gs',
+	keys: ['gs', 'googlesearch'],
 	blacklisted: true,
 	required: ["searcher", "scroll"],
 	execute(message, args, managers = {}) {
