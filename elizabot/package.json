@@ -1,0 +1,47 @@
+{
+  "_from": "elizabot@0.0.2",
+  "_id": "elizabot@0.0.2",
+  "_inBundle": false,
+  "_integrity": "sha1-kUHxnNYNqJ3VH/gn/tRGyjC+Gx4=",
+  "_location": "/elizabot",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "elizabot@0.0.2",
+    "name": "elizabot",
+    "escapedName": "elizabot",
+    "rawSpec": "0.0.2",
+    "saveSpec": null,
+    "fetchSpec": "0.0.2"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/elizabot/-/elizabot-0.0.2.tgz",
+  "_shasum": "9141f19cd60da89dd51ff827fed446ca30be1b1e",
+  "_spec": "elizabot@0.0.2",
+  "_where": "/Users/neil/Documents/GitHub/destroyer_rewritten",
+  "author": {
+    "name": "Tomas Kafka",
+    "email": "tk@tomaskafka.com"
+  },
+  "bugs": {
+    "url": "https://github.com/tkafka/node-elizabot/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Adaptation of http://www.masswerk.at/elizabot/ for node.js.",
+  "devDependencies": {},
+  "engine": "node >= 0.6",
+  "homepage": "https://github.com/tkafka/node-elizabot#readme",
+  "main": "elizabot.js",
+  "name": "elizabot",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tkafka/node-elizabot.git"
+  },
+  "version": "0.0.2"
+}

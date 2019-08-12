@@ -71,6 +71,8 @@ class Destroyer extends Necessary {
 
 		this.client.on("message", (message) => {
 			if(message.author.id === this.client.user.id) return;
+			if(process.env.DEBUG && message.guild.id != "352103491948511233") return;
+			if(!process.env.DEBUG && message.guild.id == "352103491948511233") return;
 
 
 			if(message.content.toLowerCase() == "hi jordan") {
@@ -148,10 +150,7 @@ class Destroyer extends Necessary {
 	}
 
 	commandHandler(message) {
-		if(message.author.id === this.client.user.id) return;
 		if(message.content.substring(0, this.getConfig().prefix.length).toLowerCase() != this.getConfig().prefix) return;
-		if(process.env.DEBUG && message.guild.id != "352103491948511233") return;
-		if(!process.env.DEBUG && message.guild.id == "352103491948511233") return;
 
 		var command = message.content.toLowerCase().substring(this.getConfig().prefix.length).split(' ')[0];
 		var args = message.content.toLowerCase().substring(this.getConfig().prefix.length + command.length + 1).toLowerCase();  

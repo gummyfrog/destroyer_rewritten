@@ -1,5 +1,5 @@
 var Necessary = require('./necessary.js');
-var ElizaBot = require('elizabot');
+var ElizaBot = require('./elizabot/elizabot.js');
 
 module.exports = class chatter extends Necessary {
 
