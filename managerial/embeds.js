@@ -5,6 +5,7 @@ module.exports = class embeds {
 		this.refresh(opt);
 		this.quote = this.quote.bind(this);
 		this.image = this.image.bind(this);
+		this.gif = this.gif.bind(this);
 		this.video = this.video.bind(this);
 	}
 
@@ -124,7 +125,22 @@ module.exports = class embeds {
 		return({"embed":embed});
 	}
 
-	image(url, indexIndicator = "") {
+	image(info, indexIndicator = "") {
+		var embed = {
+			title: indexIndicator,
+			color: this.colors.image,
+			image: {
+				url: info.url
+			},
+			footer: {
+				text: `👀 ${info.link}`
+			}
+		}
+
+		return({"embed":embed});
+	}
+
+	gif(url, indexIndicator = "") {
 		var embed = {
 			title: indexIndicator,
 			color: this.colors.image,

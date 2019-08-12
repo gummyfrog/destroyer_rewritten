@@ -25,7 +25,8 @@ module.exports = class search extends Necessary {
 				return;
 			}
 
-			images = images.map(img => {return img.url});
+			console.log(images);
+			images = images.map(img => {return {url: img.url, link: img.parentPage}});
 			
 			scroll.setGlobalScrollEmbeds(args, images, this.embeds.image, 20) // make this a setting!
 			message.channel.send(scroll.globalScrollEmbeds[0]).then((sentMessage) => {
@@ -66,7 +67,7 @@ module.exports = class search extends Necessary {
 
 			res = res.data.map(obj => {return obj.images.original.url})
 
-			scroll.setGlobalScrollEmbeds(args, res, this.embeds.image, 20)
+			scroll.setGlobalScrollEmbeds(args, res, this.embeds.gif, 20)
 			message.channel.send(scroll.globalScrollEmbeds[0]).then((sentMessage) => {
 				scroll.globalScrollUpdateMessage = sentMessage
 			});

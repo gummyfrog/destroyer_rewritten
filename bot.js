@@ -113,7 +113,7 @@ class Destroyer extends Necessary {
 					if(r.emoji.name === opt.pos && r.users.size == opt.res) {
 						// resolve
 						resolve();
-						return; // not too sure if these returns are actually, need to check the docs
+						collector.stop()
 
 					} else if(r.emoji.name === opt.neg && r.users.size == opt.rej) {
 						// reject
@@ -124,7 +124,7 @@ class Destroyer extends Necessary {
 							votingMessage.edit(this.embeds.cancelledVote(69));
 						}
 						reject("Downvoted to hell");
-						return; // not too sure if these returns are necessary, need to check the docs
+						collector.stop()
 					}
 				})
 			})
