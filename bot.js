@@ -15,6 +15,8 @@ var QuoteManager = require('./quoteManager.js');
 var SearchManager = require('./searchManager.js');
 var ScrollManager = require('./scrollManager.js');
 var TranslateManager = require('./translateManager.js');
+var ChatterManager = require('./chatterManager.js');
+
 var Necessary = require('./necessary.js');
 
 class Destroyer extends Necessary {
@@ -34,6 +36,7 @@ class Destroyer extends Necessary {
 		this.scroll = new ScrollManager();
 		this.searcher = new SearchManager();
 		this.translator = new TranslateManager();
+		this.chatter = new ChatterManager();
 
 		// manager is not a good name for these
 
@@ -46,6 +49,7 @@ class Destroyer extends Necessary {
 		this.managers.set("getConfig", this.getConfig);
 		this.managers.set("setConfig", this.setConfig);
 		this.managers.set("updater", this.updater);
+		this.managers.set("chatter", this.chatter);
 		this.managers.set("help", this.help);
 
 		fs.readdirSync('./commands').filter(file => file.endsWith('.js')).map((file) => {
@@ -66,6 +70,18 @@ class Destroyer extends Necessary {
 		});
 
 		this.client.on("message", (message) => {
+			if(message.author.id === this.client.user.id) return;
+
+
+			if(message.content.toLowerCase() == "hi jordan") {
+				this.chatter.start(message);
+			} else if(message.content.toLowerCase() == "bye jordan") {
+				this.chatter.stop(message);
+			} else if(this.chatter.conversingStatus) {
+				this.chatter.ask(message);
+			}
+
+
 			console.log(`${message.author.tag} : ${message.content}`)
 			if(message.attachments.first()) {
 				for(var a=0;a<message.attachments.array().length;a++) {

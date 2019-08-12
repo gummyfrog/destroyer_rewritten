@@ -174,6 +174,17 @@ module.exports = class embeds {
 
 	// no binding required
 
+	prophecy(msg) {
+		var embed = {
+			title: "🔮✨",
+			description: `${msg}`,
+			color: this.colors.video
+		}
+
+		return({"embed":embed})
+	}
+
+
 	leaderboard(name, stat) {
 		console.log(stat)
 		var embed = {
