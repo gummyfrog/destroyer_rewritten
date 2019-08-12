@@ -14,10 +14,10 @@ exports.elizaInitials = [
 exports.elizaFinals = [
 	"Goodbye.  It was nice talking to you.",
 // additions (not original)
-	"Goodbye.  This was really a nice talk.",
-	"Goodbye.  I'm looking forward to our next session.",
-	"This was a good session, wasn't it -- but time is over now.   Goodbye.",
-	"Maybe we could discuss this moreover in our next session?   Goodbye."
+	"Goodbye. This was really a nice talk.",
+	"Goodbye. I'm looking forward to our next session.",
+	"This was a good session, wasn't it -- but time is over now. Goodbye.",
+	"Maybe we could discuss this moreover in our next session? Goodbye."
 ];
 
 exports.elizaQuits = [
@@ -68,8 +68,8 @@ exports.elizaSynons = {
 	"desire": ["want", "need"],
 	"everyone": ["everybody", "nobody", "noone"],
 	"family": ["mother", "mom", "father", "dad", "sister", "brother", "wife", "children", "child"],
-	"happy": ["elated", "glad", "better"],
-	"sad": ["unhappy", "depressed", "sick"]
+	"happy": ["elated", "glad", "better", "great"],
+	"sad": ["unhappy", "depressed", "sick", "fucked up"]
 };
 
 exports.elizaKeywords = [
@@ -292,16 +292,6 @@ exports.elizaKeywords = [
 			"Really, my (2)?",
 			"What makes you think of my (2)?",
 			"Do you want my (2)?"
-		]]
-	]],
-	["u", 0, [
-		["*", [
-			"goto you"
-		]]
-	]],
-	["ur", 0, [
-		["*", [
-			"goto your"
 		]]
 	]],
 	["was", 2, [

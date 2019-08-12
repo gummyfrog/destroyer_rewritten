@@ -75,9 +75,9 @@ class Destroyer extends Necessary {
 			if(!process.env.DEBUG && message.guild.id == "352103491948511233") return;
 
 
-			if(message.content.toLowerCase() == "hi jordan") {
+			if(message.content.toLowerCase() == "hi jordan" && !this.chatter.conversingStatus) {
 				this.chatter.start(message);
-			} else if(message.content.toLowerCase() == "bye jordan") {
+			} else if(message.content.toLowerCase() == "bye jordan" && this.chatter.conversingStatus) {
 				this.chatter.stop(message);
 			} else if(this.chatter.conversingStatus) {
 				this.chatter.ask(message);
