@@ -81,6 +81,8 @@ class Destroyer extends Necessary {
 				this.chatter.stop(message);
 			} else if(this.chatter.conversingStatus) {
 				this.chatter.ask(message);
+			} else if (!this.chatter.conversingStatus && Math.random()*3 == 1 ) {
+				this.chatter.learn(message)
 			}
 
 

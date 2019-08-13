@@ -14,13 +14,24 @@ module.exports = class chatter extends Necessary {
 		this.manager.addDocument('en', 'hi', 'greetings.hello');	
 		this.manager.addAnswer('en', 'greetings.hello', 'Hey there!');
 		this.manager.addAnswer('en', 'greetings.bye', 'see you soon!');
+
+		this.associations = [];
 	}
 
 	start(message) {
 		this.conversingStatus = true;
 	}
 
+	learn(message) {
+		this.associations.push(message.content);
+		if(this.associations.length == 2) {
+			this.manager.addDocument('en', this.associations[0], 'associations');
+		    this.manager.addAnswer('en', 'associations', this.associations[1]);
+		}
+	}
+
 	ask(message) {
+		message.channel.startTyping();
 		(async() => {
 		    await this.manager.train();
 		    this.manager.save();
@@ -33,8 +44,7 @@ module.exports = class chatter extends Necessary {
 
 		    this.manager.addDocument('en', message.content, message.content.split(' ')[0])
 		    this.manager.addAnswer('en', message.content.split(' ')[0], message.content)
-
-		    
+			message.channel.stopTyping();
 		})();
 	}
 
