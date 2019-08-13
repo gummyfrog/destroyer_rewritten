@@ -1,0 +1,739 @@
+{
+  "settings": {
+    "languages": [
+      "en"
+    ]
+  },
+  "nluManager": {
+    "settings": {},
+    "languages": [
+      "en"
+    ],
+    "intentDomains": {},
+    "domainManagers": {
+      "en": {
+        "settings": {
+          "language": "en",
+          "useNoneFeature": true,
+          "config": {
+            "activation": "leaky-relu",
+            "hiddenLayers": [],
+            "iterations": 20000,
+            "learningRate": 0.7,
+            "errorThresh": 0.00005,
+            "momentum": 0.5,
+            "deltaErrorThresh": 0.000001,
+            "maxDecimals": 9,
+            "leakyReluAlpha": 0.08,
+            "timeout": 120000
+          }
+        },
+        "language": "en",
+        "nluClassName": "BrainNLU",
+        "useMasterDomain": true,
+        "trainByDomain": false,
+        "keepStopwords": true,
+        "stemDict": {
+          "for,goodby,now": {
+            "domain": "default",
+            "intent": "greetings.bye"
+          },
+          "hi": {
+            "domain": "default",
+            "intent": "hi"
+          },
+          "are,how,jordan,you": {
+            "domain": "default",
+            "intent": "jordan"
+          },
+          "is,jordan,up,what": {
+            "domain": "default",
+            "intent": "jordan"
+          },
+          "are,ok,you": {
+            "domain": "default",
+            "intent": "are"
+          },
+          "jordan": {
+            "domain": "default",
+            "intent": "jordan?"
+          },
+          "about,but,jordan,what,yeah,you": {
+            "domain": "default",
+            "intent": "yeah"
+          },
+          "are,jordan,no,you": {
+            "domain": "default",
+            "intent": "no"
+          },
+          "are,jordan,you": {
+            "domain": "default",
+            "intent": "YOU'RE"
+          },
+          "is,it,no,you": {
+            "domain": "default",
+            "intent": "NO"
+          },
+          "am,fed,i,up,with,you": {
+            "domain": "default",
+            "intent": "i'm"
+          }
+        },
+        "intentDict": {
+          "greetings.bye": "default",
+          "greetings.hello": "default",
+          "hi": "default",
+          "jordan": "default",
+          "are": "default",
+          "jordan?": "default",
+          "yeah": "default",
+          "no": "default",
+          "YOU'RE": "default",
+          "NO": "default",
+          "i'm": "default"
+        },
+        "useStemDict": true,
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "language": "en",
+              "useNoneFeature": true,
+              "config": {
+                "activation": "leaky-relu",
+                "hiddenLayers": [],
+                "iterations": 20000,
+                "learningRate": 0.7,
+                "errorThresh": 0.00005,
+                "momentum": 0.5,
+                "deltaErrorThresh": 0.000001,
+                "maxDecimals": 9,
+                "leakyReluAlpha": 0.08,
+                "timeout": 120000
+              }
+            },
+            "language": "en",
+            "keepStopwords": true,
+            "docs": [
+              {
+                "intent": "greetings.bye",
+                "tokens": [
+                  "goodby",
+                  "for",
+                  "now"
+                ]
+              },
+              {
+                "intent": "hi",
+                "tokens": [
+                  "hi"
+                ]
+              },
+              {
+                "intent": "jordan",
+                "tokens": [
+                  "jordan",
+                  "how",
+                  "are",
+                  "you"
+                ]
+              },
+              {
+                "intent": "jordan",
+                "tokens": [
+                  "jordan",
+                  "what",
+                  "is",
+                  "up"
+                ]
+              },
+              {
+                "intent": "are",
+                "tokens": [
+                  "are",
+                  "you",
+                  "ok"
+                ]
+              },
+              {
+                "intent": "jordan?",
+                "tokens": [
+                  "jordan"
+                ]
+              },
+              {
+                "intent": "yeah",
+                "tokens": [
+                  "yeah",
+                  "but",
+                  "what",
+                  "about",
+                  "you",
+                  "jordan"
+                ]
+              },
+              {
+                "intent": "no",
+                "tokens": [
+                  "no",
+                  "you",
+                  "are",
+                  "jordan"
+                ]
+              },
+              {
+                "intent": "YOU'RE",
+                "tokens": [
+                  "you",
+                  "are",
+                  "jordan"
+                ]
+              },
+              {
+                "intent": "NO",
+                "tokens": [
+                  "no",
+                  "it",
+                  "is",
+                  "you"
+                ]
+              },
+              {
+                "intent": "i'm",
+                "tokens": [
+                  "i",
+                  "am",
+                  "fed",
+                  "up",
+                  "with",
+                  "you"
+                ]
+              }
+            ],
+            "features": {
+              "goodby": 1,
+              "for": 1,
+              "now": 1,
+              "hi": 1,
+              "jordan": 6,
+              "how": 1,
+              "are": 4,
+              "you": 7,
+              "what": 2,
+              "is": 2,
+              "up": 2,
+              "ok": 1,
+              "yeah": 1,
+              "but": 1,
+              "about": 1,
+              "no": 2,
+              "it": 1,
+              "i": 1,
+              "am": 1,
+              "fed": 1,
+              "with": 1
+            },
+            "isEditing": false,
+            "className": "BrainNLU",
+            "classifier": {
+              "className": "BrainClassifier",
+              "settings": {
+                "language": "en",
+                "useNoneFeature": true,
+                "config": {
+                  "activation": "leaky-relu",
+                  "hiddenLayers": [],
+                  "iterations": 20000,
+                  "learningRate": 0.7,
+                  "errorThresh": 0.00005,
+                  "momentum": 0.5,
+                  "deltaErrorThresh": 0.000001,
+                  "maxDecimals": 9,
+                  "leakyReluAlpha": 0.08,
+                  "timeout": 120000
+                }
+              },
+              "labels": [],
+              "network": {
+                "sizes": [
+                  22,
+                  11
+                ],
+                "layers": [
+                  {
+                    "goodby": {},
+                    "for": {},
+                    "now": {},
+                    "hi": {},
+                    "jordan": {},
+                    "how": {},
+                    "are": {},
+                    "you": {},
+                    "what": {},
+                    "is": {},
+                    "up": {},
+                    "ok": {},
+                    "yeah": {},
+                    "but": {},
+                    "about": {},
+                    "no": {},
+                    "it": {},
+                    "i": {},
+                    "am": {},
+                    "fed": {},
+                    "with": {},
+                    "nonefeature": {}
+                  },
+                  {
+                    "greetings.bye": {
+                      "bias": 0.398673112,
+                      "weights": {
+                        "goodby": 4.03370285,
+                        "for": 4.03370285,
+                        "now": 4.03370285,
+                        "hi": -0.63979131,
+                        "jordan": -0.675563753,
+                        "how": -0.094035052,
+                        "are": -0.269183695,
+                        "you": -0.464072347,
+                        "what": -0.142934442,
+                        "is": -0.22031264,
+                        "up": -0.186947271,
+                        "ok": -0.160885021,
+                        "yeah": -0.024499202,
+                        "but": -0.024499202,
+                        "about": -0.024499202,
+                        "no": -0.111699365,
+                        "it": -0.101877406,
+                        "i": -0.06851203,
+                        "am": -0.06851203,
+                        "fed": -0.06851203,
+                        "with": -0.06851203,
+                        "nonefeature": -0.397409141
+                      }
+                    },
+                    "hi": {
+                      "bias": 1.340493265,
+                      "weights": {
+                        "goodby": -0.614156663,
+                        "for": -0.614156663,
+                        "now": -0.614156663,
+                        "hi": 11.148252487,
+                        "jordan": -1.768635392,
+                        "how": -0.13198334,
+                        "are": -0.560968101,
+                        "you": -0.987645566,
+                        "what": -0.237865701,
+                        "is": -0.453192443,
+                        "up": -0.358071983,
+                        "ok": -0.413596511,
+                        "yeah": -0.030381449,
+                        "but": -0.030381449,
+                        "about": -0.030381449,
+                        "no": -0.25630492,
+                        "it": -0.245708153,
+                        "i": -0.150587827,
+                        "am": -0.150587827,
+                        "fed": -0.150587827,
+                        "with": -0.150587827,
+                        "nonefeature": -1.318334699
+                      }
+                    },
+                    "jordan": {
+                      "bias": -0.753307386,
+                      "weights": {
+                        "goodby": -0.048295885,
+                        "for": -0.048295885,
+                        "now": -0.048295885,
+                        "hi": -0.070540488,
+                        "jordan": 0.598611176,
+                        "how": 12.452301025,
+                        "are": 1.334442139,
+                        "you": -1.156084657,
+                        "what": 3.642246246,
+                        "is": 4.621845245,
+                        "up": 4.386967182,
+                        "ok": -0.805573404,
+                        "yeah": -1.404949307,
+                        "but": -1.404949307,
+                        "about": -1.404949307,
+                        "no": -2.462162018,
+                        "it": -0.425351411,
+                        "i": -0.660226345,
+                        "am": -0.660226345,
+                        "fed": -0.660226345,
+                        "with": -0.660226345,
+                        "nonefeature": -0.023486448
+                      }
+                    },
+                    "are": {
+                      "bias": 0.221953282,
+                      "weights": {
+                        "goodby": -0.133466154,
+                        "for": -0.133466154,
+                        "now": -0.133466154,
+                        "hi": -0.318196863,
+                        "jordan": -4.947734356,
+                        "how": -0.706449807,
+                        "are": 2.869617701,
+                        "you": 1.855985522,
+                        "what": -0.188855022,
+                        "is": -0.398024976,
+                        "up": -0.426753163,
+                        "ok": 7.552285194,
+                        "yeah": -0.188855022,
+                        "but": -0.188855022,
+                        "about": -0.188855022,
+                        "no": -1.340910673,
+                        "it": -0.398024976,
+                        "i": -0.426753163,
+                        "am": -0.426753163,
+                        "fed": -0.426753163,
+                        "with": -0.426753163,
+                        "nonefeature": -0.221034959
+                      }
+                    },
+                    "jordan?": {
+                      "bias": 1.495874009,
+                      "weights": {
+                        "goodby": -0.561564982,
+                        "for": -0.561564982,
+                        "now": -0.561564982,
+                        "hi": -1.636719227,
+                        "jordan": 10.924730301,
+                        "how": -0.561401606,
+                        "are": -5.924856186,
+                        "you": -6.480866909,
+                        "what": -4.494671345,
+                        "is": -3.950280666,
+                        "up": -3.96181345,
+                        "yeah": -0.544419587,
+                        "but": -0.544419587,
+                        "about": -0.544419587,
+                        "no": -1.000211596,
+                        "it": -0.00002851,
+                        "i": -0.011561267,
+                        "am": -0.011561267,
+                        "fed": -0.011561267,
+                        "with": -0.011561267,
+                        "nonefeature": -1.429923534
+                      }
+                    },
+                    "yeah": {
+                      "bias": -0.159633278,
+                      "weights": {
+                        "goodby": -0.043973561,
+                        "for": -0.043973561,
+                        "now": -0.043973561,
+                        "hi": -0.05557026,
+                        "jordan": 0.159637183,
+                        "how": -0.306582034,
+                        "are": -1.394122005,
+                        "you": 1.324665189,
+                        "what": 2.094692469,
+                        "is": -1.084254861,
+                        "up": -1.08821106,
+                        "yeah": 3.026879072,
+                        "but": 3.026879072,
+                        "about": 3.026879072,
+                        "no": -0.533714294,
+                        "it": -0.15206793,
+                        "i": -0.156023964,
+                        "am": -0.156023964,
+                        "fed": -0.156023964,
+                        "with": -0.156023964,
+                        "nonefeature": -0.017816983
+                      }
+                    },
+                    "no": {
+                      "bias": -1.856984992,
+                      "weights": {
+                        "goodby": -0.038479526,
+                        "for": -0.038479526,
+                        "now": -0.038479526,
+                        "hi": -0.045048881,
+                        "jordan": 1.472729564,
+                        "how": -2.100001574,
+                        "are": 2.474078894,
+                        "you": -2.023959637,
+                        "what": -0.238113686,
+                        "is": -4.266161442,
+                        "up": -0.21692276,
+                        "ok": -0.713286936,
+                        "yeah": -0.163727194,
+                        "but": -0.163727194,
+                        "about": -0.163727194,
+                        "no": 12.353192329,
+                        "it": -4.191774845,
+                        "i": -0.142536268,
+                        "am": -0.142536268,
+                        "fed": -0.142536268,
+                        "with": -0.142536268,
+                        "nonefeature": -0.013292084
+                      }
+                    },
+                    "YOU'RE": {
+                      "bias": -2.973873384,
+                      "weights": {
+                        "goodby": -0.088917084,
+                        "for": -0.088917084,
+                        "now": -0.088917084,
+                        "hi": -0.129584968,
+                        "jordan": 3.308394432,
+                        "how": -11.64889431,
+                        "are": 6.639452457,
+                        "you": 4.892773628,
+                        "what": -1.504425764,
+                        "is": -0.509590447,
+                        "up": -0.615073025,
+                        "ok": -8.338047028,
+                        "yeah": -1.210285902,
+                        "but": -1.210285902,
+                        "about": -1.210285902,
+                        "no": -11.490177155,
+                        "it": -0.215450838,
+                        "i": -0.32093358,
+                        "am": -0.32093358,
+                        "fed": -0.32093358,
+                        "with": -0.32093358,
+                        "nonefeature": -0.044847388
+                      }
+                    },
+                    "NO": {
+                      "bias": 0.138578975,
+                      "weights": {
+                        "goodby": -0.114435673,
+                        "for": -0.114435673,
+                        "now": -0.114435673,
+                        "hi": -0.217023224,
+                        "jordan": -2.421586752,
+                        "how": -0.236422479,
+                        "are": -2.143589735,
+                        "you": 1.706699729,
+                        "what": -0.653503299,
+                        "is": 3.698893547,
+                        "up": -0.829604268,
+                        "ok": -0.375506371,
+                        "yeah": -0.108668961,
+                        "but": -0.108668961,
+                        "about": -0.108668961,
+                        "no": 2.712066889,
+                        "it": 4.24372673,
+                        "i": -0.284769952,
+                        "am": -0.284769952,
+                        "fed": -0.284769952,
+                        "with": -0.284769952,
+                        "nonefeature": -0.13830699
+                      }
+                    },
+                    "i'm": {
+                      "bias": 0.084047349,
+                      "weights": {
+                        "goodby": -0.094929315,
+                        "for": -0.094929315,
+                        "now": -0.094929315,
+                        "hi": -0.146187738,
+                        "jordan": -0.861145496,
+                        "how": -0.247875676,
+                        "are": -0.802592278,
+                        "you": 1.146196246,
+                        "what": -0.510263979,
+                        "is": -0.677532673,
+                        "up": 1.932991743,
+                        "ok": -0.451710761,
+                        "yeah": -0.109066166,
+                        "but": -0.109066166,
+                        "about": -0.109066166,
+                        "no": -0.335176021,
+                        "it": -0.276334941,
+                        "i": 2.334188938,
+                        "am": 2.334188938,
+                        "fed": 2.334188938,
+                        "with": 2.334188938,
+                        "nonefeature": -0.08394482
+                      }
+                    },
+                    "None": {
+                      "bias": 5.616764859,
+                      "weights": {
+                        "goodby": -1.86888957,
+                        "for": -1.86888957,
+                        "now": -1.86888957,
+                        "hi": -5.571000576,
+                        "jordan": -5.566082954,
+                        "how": -0.146333456,
+                        "are": -1.469903469,
+                        "you": -2.826771259,
+                        "what": -0.314732671,
+                        "is": -1.112787485,
+                        "up": -0.783784091,
+                        "ok": -1.309651971,
+                        "yeah": -0.029920854,
+                        "but": -0.029920854,
+                        "about": -0.029920854,
+                        "no": -0.837548196,
+                        "it": -0.827976108,
+                        "i": -0.498972178,
+                        "am": -0.498972178,
+                        "fed": -0.498972178,
+                        "with": -0.498972178,
+                        "nonefeature": 6.716870785
+                      }
+                    }
+                  }
+                ],
+                "trainOpts": {
+                  "iterations": 20000,
+                  "errorThresh": 0.00005,
+                  "deltaErrorThresh": 0.000001,
+                  "learningRate": 0.7,
+                  "momentum": 0.5,
+                  "leakyReluAlpha": 0.08,
+                  "maxDecimals": 9,
+                  "log": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "extraSentences": [
+      [
+        "en",
+        "goodbye for now"
+      ],
+      [
+        "en",
+        "hi"
+      ],
+      [
+        "en",
+        "hi"
+      ],
+      [
+        "en",
+        "jordan how are you"
+      ],
+      [
+        "en",
+        "jordan what's up"
+      ],
+      [
+        "en",
+        "are you ok?"
+      ],
+      [
+        "en",
+        "jordan?"
+      ],
+      [
+        "en",
+        "yeah but what about you jordan"
+      ],
+      [
+        "en",
+        "no YOU'RE jordan"
+      ],
+      [
+        "en",
+        "YOU'RE JORDAN"
+      ],
+      [
+        "en",
+        "NO IT'S YOU"
+      ],
+      [
+        "en",
+        "i'm fed up with you"
+      ]
+    ]
+  },
+  "nerManager": {
+    "settings": {},
+    "threshold": 0.8,
+    "builtins": [
+      "Number",
+      "Ordinal",
+      "Percentage",
+      "Age",
+      "Currency",
+      "Dimension",
+      "Temperature",
+      "DateTime",
+      "PhoneNumber",
+      "IpAddress",
+      "Boolean",
+      "Email",
+      "Hashtag",
+      "URL"
+    ],
+    "namedEntities": {}
+  },
+  "slotManager": {},
+  "responses": {
+    "en": {
+      "greetings.hello": [
+        {
+          "response": "Hey there!"
+        }
+      ],
+      "greetings.bye": [
+        {
+          "response": "see you soon!"
+        }
+      ],
+      "hi": [
+        {
+          "response": "hi"
+        }
+      ],
+      "jordan": [
+        {
+          "response": "jordan how are you"
+        },
+        {
+          "response": "jordan what's up"
+        }
+      ],
+      "are": [
+        {
+          "response": "are you ok?"
+        }
+      ],
+      "jordan?": [
+        {
+          "response": "jordan?"
+        }
+      ],
+      "yeah": [
+        {
+          "response": "yeah but what about you jordan"
+        }
+      ],
+      "no": [
+        {
+          "response": "no YOU'RE jordan"
+        }
+      ],
+      "YOU'RE": [
+        {
+          "response": "YOU'RE JORDAN"
+        }
+      ],
+      "NO": [
+        {
+          "response": "NO IT'S YOU"
+        }
+      ],
+      "i'm": [
+        {
+          "response": "i'm fed up with you"
+        }
+      ]
+    }
+  },
+  "actions": {},
+  "utteranceDict": {
+    "?": "help"
+  }
+}
