@@ -1,6 +1,6 @@
 stats.json
 model.nlp
-
+misc/
 # Logs
 logs
 *.log
