@@ -1,5 +1,5 @@
-var embeds = require('./managerial/embeds.js');
-var stats = require('./managerial/stats.js');
+var embeds = require('./embeds.js');
+var stats = require('./stats.js');
 var path = require('path');
 var json = require('jsonfile');
 // var appDir = path.dirname(require.main.filename);
@@ -17,6 +17,12 @@ module.exports = class Necessary {
 		console.log("There was an error!".bold.red);
 		console.log(`${err}`.red);
 		if(message) {message.channel.send(this.embeds.error(err))};
+	}
+
+	dlog(msg) {
+		if(process.env.VERB) {
+			console.log(` * ${msg}`.blue.bold);
+		}
 	}
 
 	getConfig() {

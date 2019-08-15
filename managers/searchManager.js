@@ -24,8 +24,6 @@ module.exports = class search extends Necessary {
 				message.channel.send(this.embeds.alert("No results found."))
 				return;
 			}
-
-			console.log(images);
 			images = images.map(img => {return {url: img.url, link: img.parentPage}});
 			
 			scroll.setGlobalScrollEmbeds(args, images, this.embeds.image, 20) // make this a setting!

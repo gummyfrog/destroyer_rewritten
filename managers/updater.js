@@ -1,6 +1,6 @@
 var axios = require('axios')
 
-class Updater {
+class updater {
   
   constructor(opt = {}) {
     this.settings = Object.assign({name: "Unnamed Source", desc: "Undescribed Source"}, opt);
@@ -41,5 +41,5 @@ class Updater {
   }
 };
 
-module.exports = Updater;
+module.exports = updater;
 

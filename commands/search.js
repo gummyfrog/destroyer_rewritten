@@ -3,9 +3,9 @@ module.exports = {
 	description: 'Performs a Google Images search.',
 	keys: ['s', 'search'],
 	blacklisted: true,
-	required: ["searcher", "scroll"],
+	required: ["search", "scroll"],
 	execute(message, args, managers = {}) {
-		managers.searcher.imageSearch(message, args, managers.scroll);
+		managers.search.imageSearch(message, args, managers.scroll);
 	},
 };
 

@@ -3,9 +3,9 @@ module.exports = {
 	description: 'Searches for a gif.',
 	keys: ['g', 'gif'],
 	blacklisted: true,
-	required: ["searcher", "scroll"],
+	required: ["search", "scroll"],
 	execute(message, args, managers = {}) {
-		managers.searcher.giphySearch(message, args, managers.scroll);
+		managers.search.giphySearch(message, args, managers.scroll);
 	},
 };
 

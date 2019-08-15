@@ -7,6 +7,10 @@ module.exports = class embeds {
 		this.image = this.image.bind(this);
 		this.gif = this.gif.bind(this);
 		this.video = this.video.bind(this);
+
+		if(process.env.DEBUG) {
+			this.monocolor(16728663);
+		}
 	}
 
 	refresh(config) {

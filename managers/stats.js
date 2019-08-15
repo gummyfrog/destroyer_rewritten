@@ -4,6 +4,7 @@ module.exports = class stats {
 
 	constructor() {
 		// this.stats = json.readFileSync('./stats.json');
+		this.name = "stats";
 		this.stats = {};
 	}
 

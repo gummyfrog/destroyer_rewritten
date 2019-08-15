@@ -3,9 +3,9 @@ module.exports = {
 	description: 'Looks for a YouTube video.',
 	keys: ['ys', 'youtube'],
 	blacklisted: true,
-	required: ["searcher", "scroll"],
+	required: ["search", "scroll"],
 	execute(message, args, managers = {}) {
-		managers.searcher.ytSearch(message, args, managers.scroll);
+		managers.search.ytSearch(message, args, managers.scroll);
 	},
 };
 

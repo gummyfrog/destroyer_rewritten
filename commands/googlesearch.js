@@ -3,9 +3,9 @@ module.exports = {
 	description: 'Performs a Google search.',
 	keys: ['gs', 'googlesearch'],
 	blacklisted: true,
-	required: ["searcher", "scroll"],
+	required: ["search", "scroll"],
 	execute(message, args, managers = {}) {
-		managers.searcher.googleSearch(message, args, managers.scroll);
+		managers.search.googleSearch(message, args, managers.scroll);
 	},
 };
 

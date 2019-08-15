@@ -1,6 +1,6 @@
 var Necessary = require('./necessary.js')
 
-module.exports = class quoteManager extends Necessary {
+module.exports = class quotes extends Necessary {
 
 	constructor() {
 		super();

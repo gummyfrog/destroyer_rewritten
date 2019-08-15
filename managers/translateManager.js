@@ -1,17 +1,17 @@
 var Necessary = require('./necessary.js');
-var lang = require('./lang.js')
 var translate = require('translate-google');
 
-module.exports = class traslator extends Necessary {
+module.exports = class translator extends Necessary {
 
 	constructor() {
 		super();
-		this.lang = 'en';
+		this.currentLang = 'en';
+		this.lang = require(`${process.cwd()}/misc/lang.js`)
 	}
 
 	translate(message, args) {
 		console.log(args);
-		translate(args, {to: this.lang})
+		translate(args, {to: this.currentLang})
 		.then((res) => {
 		  	console.log(res);
 		  	message.delete()
@@ -23,7 +23,7 @@ module.exports = class traslator extends Necessary {
 
 	changelang(message, args) {
 		if(lang.isSupported(args)) {
-			this.lang = lang.getCode(args);
+			this.currentLang = lang.getCode(args);
 			message.channel.send(this.embeds.translation(`Messages`, `${args}`))
 		} else {
 			this.errorHandler(`${args} is not a valid language code.`, message)
