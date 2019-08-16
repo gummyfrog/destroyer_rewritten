@@ -41,8 +41,6 @@ class Destroyer extends Necessary {
 		
 		console.log(`${this.managers.array().length} Total Managers Loaded Successfully.`.bold)
 
-
-
 		fs.readdirSync('./commands').filter(file => file.endsWith('.js')).map((file) => {
 			var command = require(`./commands/${file}`);
 			for(var k=0; k<command.keys.length;k++) {
@@ -85,9 +83,6 @@ class Destroyer extends Necessary {
 
 		this.client.login(this.codes.token);
 	};
-
-
-
 
 	checkWordsForBlacklist(words) {	
 		return words.split(' ').some((e) => {return this.getConfig().blacklist.includes(e) || this.getConfig().blacklist.includes(words)});

@@ -4,6 +4,7 @@ module.exports = class embeds {
 		this.colors = {};
 		this.refresh(opt);
 		this.quote = this.quote.bind(this);
+		this.reference = this.reference.bind(this);
 		this.image = this.image.bind(this);
 		this.gif = this.gif.bind(this);
 		this.video = this.video.bind(this);
@@ -21,6 +22,7 @@ module.exports = class embeds {
 			video: 10041553, // #9938D1
 			image: 14707627, // #e06bab
 			warn: 16728663, // #B52F49
+			reference: 10526880, // #7FA864
 		}, config);
 	}
 
@@ -100,7 +102,6 @@ module.exports = class embeds {
 	// used lazy binding for these :( fix later
 
 	quote(msg) {
-		console.log(msg);
 		var filename = msg.author.avatarURL.substring(0, msg.author.avatarURL.indexOf('?')).replace(/\D/g,'');
 		var author = msg.author;
 		var authId = `${author.id}`;
@@ -128,6 +129,38 @@ module.exports = class embeds {
 
 		return({"embed":embed});
 	}
+
+
+	reference(msg) {
+		var filename = msg.author.avatarURL.substring(0, msg.author.avatarURL.indexOf('?')).replace(/\D/g,'');
+		var author = msg.author;
+		var authId = `${author.id}`;
+		var embed = {
+			description: msg.content,
+			color: this.colors.reference,
+			author: {
+				name: author.username,
+				icon_url: `http://frogeye.duckdns.org:8282/images/${filename}.png`
+			},
+			footer: {
+				text: `${msg.createdAt.toLocaleTimeString()}`
+			}
+		}
+
+		if(msg.attachments.size >= 1) {    
+			embed.image = {
+				url: msg.attachments.first().url
+			}
+		}
+
+		if(msg.embeds.length >= 1) {
+			embed = msg.embeds[0];
+		};
+
+		return({"embed":embed});
+	}
+
+
 
 	image(info, indexIndicator = "") {
 		var embed = {

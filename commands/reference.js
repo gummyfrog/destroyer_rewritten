@@ -1,10 +1,10 @@
 module.exports = {
 	name: 'Quote',
 	description: 'Saves a message.',
-	keys: ['q', 'quote'],
-	required: ["quotes", "updater"],
+	keys: ['r', 'reference'],
+	required: ["quotes"],
 	execute(message, args, managers = {}) {
-		managers.quotes.quote(message, args, managers.updater);
+		managers.quotes.reference(message, args);
 	},
 };
 
