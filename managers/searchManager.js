@@ -53,7 +53,6 @@ module.exports = class search extends Necessary {
 		.catch((err) => this.errorHandler(err, message))
 	}	
 
-
 	giphySearch(message, args, scroll) {
 		if(args==null) return;
 		this.giphy.search(args)
@@ -81,5 +80,4 @@ module.exports = class search extends Necessary {
 		}) 
 		.catch((err) => this.errorHandler(err, message))
 	}
-
 }

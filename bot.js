@@ -4,7 +4,6 @@ var colors = require('colors');
 var json = require('jsonfile');
 var fs = require('fs');
 
-// var translate = require('@vitalets/google-translate-api');
 // var urban = require('urban.js');
 // var probe = require('probe-image-size');
 // var download = require('image-downloader')
@@ -24,7 +23,6 @@ class Destroyer extends Necessary {
 		this.help = {};
 		this.managerList = {};
 
-		// manager is not a good name for these
 		console.log("Loading Managers...".bold);
 		fs.readdirSync('./managers').filter(file => file.endsWith('.js')).map((file) => {
 			var manager = require(`./managers/${file}`);
@@ -43,12 +41,13 @@ class Destroyer extends Necessary {
 
 		fs.readdirSync('./commands').filter(file => file.endsWith('.js')).map((file) => {
 			var command = require(`./commands/${file}`);
+			this.dlog(`${command.name}; ./commands/${file}`.bold)
 			for(var k=0; k<command.keys.length;k++) {
 				this.commands.set(command.keys[k], command);
+
 			}
 			this.help[`${command.name} **(${command.keys.join(' or ')})**`] = `⮑ ${command.description}`
 		});
-
 
 		// set client events
 
@@ -176,7 +175,6 @@ class Destroyer extends Necessary {
 		});
 	}
 }
-
 
 var jordan = new Destroyer();
 

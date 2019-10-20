@@ -326,6 +326,7 @@ module.exports = class embeds {
 	help(helpObject) {
 		var embed = this.arbitraryObjectDisplay(helpObject);
 		embed.title = "Jordan 2.0b Help Menu";
+		embed.inline = true;
 		return({"embed":embed});
 	}
 

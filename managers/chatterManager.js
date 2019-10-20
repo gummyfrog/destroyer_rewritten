@@ -52,7 +52,6 @@ module.exports = class chatter extends Necessary {
 		}
 	}
 
-
 	tryStart(message) {
 		(async() => {
 			const response = await this.manager.process('en', message.content)
@@ -62,7 +61,6 @@ module.exports = class chatter extends Necessary {
 			}
 		})()
 	}
-
 
 	ask(message) {
 		(async() => {
