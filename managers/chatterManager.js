@@ -1,81 +1,81 @@
 var Necessary = require('./necessary.js');
-var { NlpManager } = require('node-nlp');
+var json = require('jsonfile');
+var fs = require('fs')
+var Markov = require('js-markov');
 
 module.exports = class chatter extends Necessary {
 
 	constructor() {
-		super();
-		this.manager = new NlpManager({ languages: ['en'] });			
-		this.manager.load(`${process.cwd()}/misc/model.nlp`)	
+		super();	
 		this.conversingStatus = false;
+		this.profile_dir = `${process.cwd()}/misc/models/`
+		fs.readdirSync(this.profile_dir).filter(file => file.endsWith('.json')).map((file) => {
+			var profile = json.readFile(`${this.profile_dir}/${file}`, (err, obj) => {
+				this.profiles[obj.name] = {obj};
+				console.log(this.profiles);
+			});
+		});
 
-		this.manager.addDocument('en', 'search for an image', 'commands.imageSearch');
-		this.manager.addDocument('en', 'hi', 'jordan.greetings');	
-		this.manager.addDocument('en', 'hi jordan', 'jordan.greetings');	
-		this.manager.addDocument('en', "what's up jordan", 'jordan.greetings');	
-
-		this.manager.addAnswer('en', 'commands.imageSearch', 'ok search for what??');
-		this.manager.addAnswer('en', 'jordan.greetings', 'hiiii');
-		this.manager.addAnswer('en', 'jordan.greetings', 'woooa');
-
-		this.associations = [];
+		this.profiles = {};
 	}
 
 	check(message) {
 		this.learn(message)
 
-		if(!this.conversingStatus) {
-			this.tryStart(message);
+		if(message.content.toLowerCase().includes(["jordan"]) && !this.conversingStatus) {
+			this.start(message);
 		} else if(message.content.toLowerCase() == "bye jordan" && this.conversingStatus) {
 			this.stop(message);
-		} else if(this.conversingStatus) {
-			this.ask(message);
+		} else if(this.conversingStatus){
+			this.respond(message);
 		}
 	}
 
 	learn(message) {
-		if(this.associations.length != 0) {
-			console.log(`Tracked Question: ${this.associations[0].user}: ${this.associations[0].txt} ?`)
+		var profile = `${this.profile_dir}/${message.author.username}.json`
+		if (fs.existsSync(profile)) {
+			console.log(`${profile} exists`)
+			json.readFile(profile, (err, obj) => {
+				obj.corpus.push(message.content);
+				this.profiles[obj.name] = obj;
+
+				json.writeFile(profile, obj, (err) => {
+					if(err) console.log(err);
+				});
+			});
+		} else {
+			console.log(`${profile} does not exist.`);
+			json.writeFile(profile, {name: message.author.username, corpus:[message.content]}, (err) => {
+				if(err) console.log(err);
+			});
 		}
 
-		if(this.associations.length == 0 || this.associations[0].user != message.author.username) {
-			this.associations.push({txt: message.content, user: message.author.username});
-		}
-
-		if(this.associations.length == 2) {
-			this.dlog(`${this.associations[0].user}: ${this.associations[0].txt} ?`)
-			this.dlog(`${this.associations[1].user}: ${this.associations[1].txt} .`)
-
-			this.manager.addDocument('en', this.associations[0].txt, 'associations');
-		    this.manager.addAnswer('en', 'associations', this.associations[1].txt);
-		    this.associations = [];
-		}
 	}
 
-	tryStart(message) {
-		(async() => {
-			const response = await this.manager.process('en', message.content)
-			if(response.classifications[0].label == 'jordan.greetings') {
-				this.conversingStatus = true;
-				message.channel.send(response.answer);
-			}
-		})()
+	respond(message) {
+		var the_profiles = Object.keys(this.profiles);
+		var random_profile = this.profiles[the_profiles[Math.floor(Math.random() * the_profiles.length)]];
+		console.log(random_profile);
+
+		// var markov = new MarkovGen({
+		// 	input: random_profile.corpus,
+		// 	minLength: 5,
+		// });
+
+		// var sentence = markov.makeChain();
+		// console.log(sentence);
+		var markov = new Markov();	
+		markov.addStates(random_profile.corpus);
+		markov.train();
+		markov.generateRandom();
+
+		message.channel.send(markov.generateRandom());
+
 	}
 
-	ask(message) {
-		(async() => {
-		    await this.manager.train();
-		    this.manager.save(`${process.cwd()}/misc/model.nlp`)
-
-		    const response = await this.manager.process('en', message.content);
-		    this.dlog(response);
-
-		    if(response.answer) {
-		    	this.dlog(response.classifications[0])
-		    	this.manager.addDocument('en', message.content, response.classifications[0].label);
-		    	message.channel.send(response.answer)
-		    }
-		})();
+	start(message) {
+		message.channel.send("hiiii");
+		this.conversingStatus = true;
 	}
 
 	stop(message) {
