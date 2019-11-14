@@ -26,7 +26,7 @@ module.exports = class chatter extends Necessary {
 			this.start(message);
 		} else if(message.content.toLowerCase() == "bye jordan" && this.conversingStatus) {
 			this.stop(message);
-		} else if(this.conversingStatus){
+		} else if(this.conversingStatus && Math.random() < 0.2){
 			this.respond(message);
 		}
 	}
