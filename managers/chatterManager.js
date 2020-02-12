@@ -8,11 +8,13 @@ module.exports = class chatter extends Necessary {
 	constructor() {
 		super();	
 		this.conversingStatus = false;
-		this.profile_dir = `${process.cwd()}/misc/models/`
+		this.profile_dir = `${process.cwd()}/misc/models`
 		fs.readdirSync(this.profile_dir).filter(file => file.endsWith('.json')).map((file) => {
 			var profile = json.readFile(`${this.profile_dir}/${file}`, (err, obj) => {
-				this.profiles[obj.name] = {obj};
-				console.log(this.profiles);
+				if(obj != undefined) {
+						this.profiles[obj.name] = {obj};
+						console.log(this.profiles);
+				}
 			});
 		});
 
@@ -36,12 +38,16 @@ module.exports = class chatter extends Necessary {
 		if (fs.existsSync(profile)) {
 			console.log(`${profile} exists`)
 			json.readFile(profile, (err, obj) => {
-				obj.corpus.push(message.content);
-				this.profiles[obj.name] = obj;
+				
+				if (err) {console.log(err); return }
+				if (obj != undefined) {
+					obj.corpus.push(message.content)
+					this.profiles[obj.name] = obj;
 
-				json.writeFile(profile, obj, (err) => {
-					if(err) console.log(err);
-				});
+					json.writeFile(profile, obj, (err) => {
+						if(err) console.log(err);
+					});
+				}
 			});
 		} else {
 			console.log(`${profile} does not exist.`);

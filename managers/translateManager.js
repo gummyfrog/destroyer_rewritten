@@ -23,7 +23,7 @@ module.exports = class translator extends Necessary {
 
 	changelang(message, args) {
 		if(lang.isSupported(args)) {
-			this.currentLang = lang.getCode(args);
+			this.currentLang = this.lang.getCode(args);
 			message.channel.send(this.embeds.translation(`Messages`, `${args}`))
 		} else {
 			this.errorHandler(`${args} is not a valid language code.`, message)
