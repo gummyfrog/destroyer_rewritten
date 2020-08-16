@@ -37,18 +37,14 @@ module.exports = class chatter extends Necessary {
 		var profile = `${this.profile_dir}/${message.author.username}.json`
 		if (fs.existsSync(profile)) {
 			console.log(`${profile} exists`)
-			json.readFile(profile, (err, obj) => {
-				
-				if (err) {console.log(err); return }
-				if (obj != undefined) {
-					obj.corpus.push(message.content)
-					this.profiles[obj.name] = obj;
 
-					json.writeFile(profile, obj, (err) => {
-						if(err) console.log(err);
-					});
-				}
-			});
+			var obj = json.readFileSync(profile);
+			if(obj != undefined) {
+				obj.corpus.push(message.content);
+				this.profiles[obj.name] = obj;
+
+				json.writeFileSync(profile, obj);
+			};
 		} else {
 			console.log(`${profile} does not exist.`);
 			json.writeFile(profile, {name: message.author.username, corpus:[message.content]}, (err) => {
