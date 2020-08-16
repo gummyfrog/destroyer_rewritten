@@ -27,7 +27,7 @@ module.exports = class Necessary {
 
 	getConfig() {
 		return json.readFileSync('config.json');
-	}
+	}	
 
 	setConfig(where, what, config) {
 		console.log(where);

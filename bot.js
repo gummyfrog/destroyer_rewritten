@@ -51,12 +51,21 @@ class Destroyer extends Necessary {
 
 		// set client events
 
+
 		this.client.on("ready", () => {
 			console.log(`Jordan ${this.package.version} Online.`.italic.bold)
 			if(process.env.DEBUG) {
 				this.dlog("Debug Mode is Enabled");
 			}
 			this.dlog("Verbose is Enabled.");
+			this.client.user.setPresence({
+				game: {
+					name: `Jordan ${this.package.version}`,
+					type: "Streaming",
+					url: "https://www.youtube.com/watch?v=n2Ielk8KsK4"
+				}
+			});
+
 		});
 
 		this.client.on("message", (message) => {
@@ -79,7 +88,6 @@ class Destroyer extends Necessary {
 		});
 
 		this.dlog("Waiting for Discord...");
-
 		this.client.login(this.codes.token);
 	};
 

@@ -3,5 +3,5 @@ config.json
 stats.json
 model.nlp
 ./model.nlp
-
+.DS_Store
 misc/
