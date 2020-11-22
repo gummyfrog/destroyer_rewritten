@@ -1,6 +1,8 @@
 var GoogleImages = require('google-images');
 var Necessary = require('./necessary.js');
 var axios = require('axios');
+var puppeteer = require('puppeteer');
+
 
 module.exports = class search extends Necessary {
 
@@ -24,8 +26,11 @@ module.exports = class search extends Necessary {
 				message.channel.send(this.embeds.alert("No results found."))
 				return;
 			}
+
 			images = images.map(img => {return {url: img.url, link: img.parentPage}});
 			
+			this.dlog(images);
+
 			scroll.setGlobalScrollEmbeds(args, images, this.embeds.image, 20) // make this a setting!
 			message.channel.send(scroll.globalScrollEmbeds[0]).then((sentMessage) => {
 				scroll.globalScrollUpdateMessage = sentMessage;
@@ -33,6 +38,43 @@ module.exports = class search extends Necessary {
 		})
 		.catch((err) => this.errorHandler(err, message))
 	}
+
+	// async imageScrape(message, args, scroll) {
+	// 	this.dlog("Let's scrape!");
+	// 	if(args == "") return;
+	// 	var browser = await puppeteer.launch();
+	// 	var page = await browser.newPage();
+	// 	await page.goto(`https://www.google.com/search?q=${args}&sxsrf=ALeKk02lVLqPSRR3wyL38GgKZXFmVDYmAQ:1605706170777&source=lnms&tbm=isch&sa=X&ved=2ahUKEwivzrDPmYztAhVBnFkKHVPhCX8Q_AUoAXoECCEQAw&biw=1070&bih=801&dpr=2`); 
+	// 	await page.screenshot({path: 'example.png'});
+
+	// 	var greatImages = await page.evaluate(async ()=> {
+	// 		var imageNodeList = document.querySelectorAll('img.Q4LuWd');
+	// 		var imageArray = [];
+
+	// 		for(var x=0;x<1;x++) {
+	// 			await imageNodeList[x].click();
+
+	// 			var realImages = document.querySelectorAll('img.n3VNCb');
+
+	// 			for(var y=0;y<realImages.length;y++) {
+	// 				if(realImages[y] != null) {
+	// 					imageArray[x] = realImages[y].get_attribute("src");
+	// 				}
+	// 			}
+	// 		}
+			
+	// 		return imageArray;
+
+	// 	});
+
+	// 	await page.screenshot({path: 'clicked.png'});
+
+
+	// 	console.log(greatImages);
+	// 	message.channel.send(`\`${greatImages}\``);
+
+	// 	await browser.close();
+	// }
 
 	ytSearch(message, args, scroll) {
 		this.youtubeSearch(args, this.yt_opts)
