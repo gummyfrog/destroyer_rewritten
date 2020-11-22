@@ -18,7 +18,7 @@ module.exports = {
 		"Tarot: Death", 
 		"Tarot: Five Of Pentacles", 
 		"Tarot: Three Of Swords", 
-		"Tarot: The Tower".
+		"Tarot: The Tower",
 		"I am Jordan!",
 		":)"]
 		message.channel.send(managers.embeds.prophecy(prophecies[Math.floor(Math.random() * prophecies.length)]))
