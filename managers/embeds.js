@@ -1,3 +1,5 @@
+/* jshint esversion:6*/
+
 module.exports = class embeds {
 
 	constructor(opt = {}) {
@@ -28,7 +30,7 @@ module.exports = class embeds {
 
 	monocolor(color) {
 		for(var k=0; k<Object.keys(this.colors).length;k++) {
-			var key = Object.keys(this.colors)[k]
+			var key = Object.keys(this.colors)[k];
 			this.colors[key] = color;
 		}
 	} 
@@ -62,7 +64,7 @@ module.exports = class embeds {
 				value = `Sub-Object with ${Object.keys(object[key]).length} keys.`;
 			}
 
-			ret += (value + ', ')
+			ret += (value + ', ');
 		}
 
 		return ret;
@@ -72,7 +74,7 @@ module.exports = class embeds {
 		var embed = {
 			color: this.colors.list,
 			fields: [],
-		}
+		};
 
 		for(var i=0;i<Object.keys(object).length;i++) {
 			var key = Object.keys(object)[i];
@@ -94,7 +96,7 @@ module.exports = class embeds {
 
 		// returns only normal embed.
 
-		console.log(embed)
+		console.log(embed);
 		return embed;
 	}
 
@@ -115,17 +117,17 @@ module.exports = class embeds {
 				name: author.username,
 				icon_url: `http://frogeye.duckdns.org:8282/images/${filename}.png`
 			},
-		}
+		};
 
 		if(msg.attachments.size >= 1) {    
 			embed.image = {
 				url: msg.attachments.first().url
-			}
+			};
 		}
 
 		if(msg.embeds.length >= 1) {
 			embed = msg.embeds[0];
-		};
+		}
 
 		return({"embed":embed});
 	}
@@ -145,17 +147,17 @@ module.exports = class embeds {
 			footer: {
 				text: `${msg.createdAt.toLocaleTimeString()}`
 			}
-		}
+		};
 
 		if(msg.attachments.size >= 1) {    
 			embed.image = {
 				url: msg.attachments.first().url
-			}
+			};
 		}
 
 		if(msg.embeds.length >= 1) {
 			embed = msg.embeds[0];
-		};
+		}
 
 		return({"embed":embed});
 	}
@@ -172,7 +174,7 @@ module.exports = class embeds {
 			footer: {
 				text: `👀 ${info.link}`
 			}
-		}
+		};
 
 		return({"embed":embed});
 	}
@@ -184,7 +186,7 @@ module.exports = class embeds {
 			image: {
 				url: url
 			}
-		}
+		};
 
 		return({"embed":embed});
 	}
@@ -204,7 +206,7 @@ module.exports = class embeds {
 				name: data.link,
 				value: data.description || "...",
 			}]
-		}
+		};
 
 		return({"embed":embed});
 	}
@@ -216,14 +218,14 @@ module.exports = class embeds {
 			title: "🔮✨",
 			description: `${msg}`,
 			color: this.colors.video
-		}
+		};
 
-		return({"embed":embed})
+		return({"embed":embed});
 	}
 
 
 	leaderboard(name, stat) {
-		console.log(stat)
+		console.log(stat);
 		var embed = {
 			title: name,
 			description: stat.desc,
@@ -232,31 +234,33 @@ module.exports = class embeds {
 				url : "https://www.shareicon.net/download/2016/07/27/802814_miscellaneous_512x512.png"
 			},
 			fields:[],
-		}
+		};
 
 		// i am a jankaholic
 
 		var c = 0;
-		var sorted = Object.keys(stat.data).sort(function(b,a){return stat.data[a]-stat.data[b]})
+		var sorted = Object.keys(stat.data).sort((b,a) => {
+			return stat.data[a]-stat.data[b];
+		});
 
 		embed.fields = Object.keys(sorted).map((key) => {
-			console.log(stat.data)
-			console.log(key)
+			console.log(stat.data);
+			console.log(key);
 			var field = {
 				name: "_ _",
 				value: `${sorted[key]} at ${stat.data[sorted[key]]}!!`
-			}
-
-			if(stat.titles[c] != undefined) {
-				field.name = stat.titles[c]
 			};
 
-			c+=1
+			if(stat.titles[c] != undefined) {
+				field.name = stat.titles[c];
+			}
 
-			return field
-		})
+			c+=1;
 
-		return({"embed":embed})
+			return field;
+		});
+
+		return({"embed":embed});
 	}
 
 	vote() {
@@ -264,10 +268,10 @@ module.exports = class embeds {
 			title: "🛑✋ Whoa, there!",
 			description: "I'm not just gonna let you do that, motherfucker. What say you?",
 			color: this.colors.warn,
-		}
+		};
 
 		return({"embed":embed});
-	};
+	}
 
 	cancelledVote(count) {
 		var embed = {
@@ -280,9 +284,9 @@ module.exports = class embeds {
 			}
 			],
 			color: this.colors.leaderboard,
-		}
+		};
 
-		return({"embed":embed})
+		return({"embed":embed});
 	}
 
 
@@ -291,9 +295,9 @@ module.exports = class embeds {
 			title: "⚠️✋",
 			description: msg,
 			color: this.colors.leaderboard
-		}
+		};
 
-		return({"embed":embed})
+		return({"embed":embed});
 	}
 
 	error(msg) {
@@ -301,9 +305,9 @@ module.exports = class embeds {
 			title: "🛑✋",
 			description: `**${msg}**`,
 			color: this.colors.warn
-		}
+		};
 
-		return({"embed":embed})
+		return({"embed":embed});
 	}
 
 	translation(original, res) {
@@ -311,7 +315,7 @@ module.exports = class embeds {
 			title: `${original}`,
 			description: `**⮑ ${res}**`,
 			color: this.colors.list
-		}
+		};
 
 		return({"embed":embed});
 	}
@@ -331,17 +335,17 @@ module.exports = class embeds {
 	}
 
 	status(statusObject) {
-		console.log(statusObject)
+		console.log(statusObject);
 		var embed = this.arbitraryObjectDisplay(statusObject, ["status", "last", "last-search"]);
 		embed.title = "What's Up?";
 		return({"embed":embed});
 	}
 
 	leaderboardList(statsObject) {
-		var embed = this.arbitraryObjectDisplay(statsObject, ["titles", "data"])
-		embed.title = "Tracked Stats"
-		return({"embed":embed})
+		var embed = this.arbitraryObjectDisplay(statsObject, ["titles", "data"]);
+		embed.title = "Tracked Stats";
+		return({"embed":embed});
 	}
 
-}
+};
 

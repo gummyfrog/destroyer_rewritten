@@ -1,4 +1,10 @@
-var axios = require('axios')
+/* jshint esversion:6 */
+
+/*
+  vaguely unused...
+*/
+
+const axios = require('axios');
 
 class updater {
   
@@ -7,17 +13,17 @@ class updater {
     
     this.name = this.settings.name;
     this.desc = this.settings.desc;
-    this.dateOptions = { hour: "2-digit", minute: "2-digit", second: "2-digit" }
-  };
+    this.dateOptions = { hour: "2-digit", minute: "2-digit", second: "2-digit" };
+  }
 
   post(obj) {
     var date = new Date();
     var postObj = {};
-    obj['desc'] = this.desc;
-    obj['last'] = date.toLocaleString('en-US', this.dateOptions)
+    obj.desc = this.desc;
+    obj.last = date.toLocaleString('en-US', this.dateOptions);
     postObj[this.name] = obj;
     return axios.post('http://frogeye.duckdns.org:8282/status', postObj, { "headers": {"password": process.env.PASSWORD}});
-  };
+  }
 
   quote(obj) {
     console.log('communicating with server');
@@ -39,7 +45,7 @@ class updater {
       });
     });
   }
-};
+}
 
 module.exports = updater;
 

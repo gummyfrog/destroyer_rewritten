@@ -1,3 +1,5 @@
+/* jshint esversion:6 */
+
 module.exports = class scroll {
 
 	constructor() {
@@ -13,17 +15,17 @@ module.exports = class scroll {
 
 		if(c >= items.length) {
 			c = items.length;
-		};
+		}
 
 		for(var i=0;i<c;i++) {
 			this.globalScrollEmbeds.push(embedFunction(items[i], this.getIndexIndicator(title, i, c)));
-		};
+		}
 
 		console.log(`${this.globalScrollEmbeds.length} embeds added to global scroll.`);
-	};
+	}
 
 	setGlobalScrollIndex(i) {
-		i = i-1
+		i = i-1;
 		if(this.globalScrollUpdateMessage == null) return;
 		if(i > this.globalScrollEmbeds.length || i < 0) return;
 
@@ -43,4 +45,4 @@ module.exports = class scroll {
 		return(`${title} ${i+1} / ${cap}`);
 	}
 
-}
+};

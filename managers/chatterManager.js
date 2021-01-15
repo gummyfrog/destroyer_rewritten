@@ -1,14 +1,20 @@
-var Necessary = require('./necessary.js');
-var json = require('jsonfile');
-var fs = require('fs')
-var Markov = require('js-markov');
+/* jshint esversion:6*/
+
+/*
+	unused manager :)
+*/
+
+const Necessary = require('./necessary.js');
+const json = require('jsonfile');
+const fs = require('fs');
+const Markov = require('js-markov');
 
 module.exports = class chatter extends Necessary {
 
 	constructor() {
 		super();	
 		this.conversingStatus = false;
-		this.profile_dir = `${process.cwd()}/misc/models`
+		this.profile_dir = `${process.cwd()}/misc/models`;
 		fs.readdirSync(this.profile_dir).filter(file => file.endsWith('.json')).map((file) => {
 			var profile = json.readFile(`${this.profile_dir}/${file}`, (err, obj) => {
 				if(obj != undefined) {
@@ -22,7 +28,7 @@ module.exports = class chatter extends Necessary {
 	}
 
 	check(message) {
-		this.learn(message)
+		this.learn(message);
 
 		if(message.content.toLowerCase().includes(["jordan"]) && !this.conversingStatus) {
 			this.start(message);
@@ -34,9 +40,9 @@ module.exports = class chatter extends Necessary {
 	}
 
 	learn(message) {
-		var profile = `${this.profile_dir}/${message.author.username}.json`
+		var profile = `${this.profile_dir}/${message.author.username}.json`;
 		if (fs.existsSync(profile)) {
-			console.log(`${profile} exists`)
+			console.log(`${profile} exists`);
 
 			var obj = json.readFileSync(profile);
 			if(obj != undefined) {
@@ -44,7 +50,7 @@ module.exports = class chatter extends Necessary {
 				this.profiles[obj.name] = obj;
 
 				json.writeFileSync(profile, obj);
-			};
+			}
 		} else {
 			console.log(`${profile} does not exist.`);
 			json.writeFile(profile, {name: message.author.username, corpus:[message.content]}, (err) => {
@@ -84,5 +90,4 @@ module.exports = class chatter extends Necessary {
 		message.channel.send("cyaaa");
 		this.conversingStatus = false;
 	}
-
-}
+};

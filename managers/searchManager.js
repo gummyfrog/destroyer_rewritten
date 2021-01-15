@@ -1,7 +1,9 @@
-var GoogleImages = require('google-images');
-var Necessary = require('./necessary.js');
-var axios = require('axios');
-var puppeteer = require('puppeteer');
+/* jshint esversion:6*/
+
+const GoogleImages = require('google-images');
+const Necessary = require('./necessary.js');
+const axios = require('axios');
+const puppeteer = require('puppeteer');
 
 
 module.exports = class search extends Necessary {
@@ -9,8 +11,8 @@ module.exports = class search extends Necessary {
 	constructor() {
 		super();
 		this.imgClient = new GoogleImages(this.codes.CSE, this.codes.API);
-		this.giphy = require('giphy-api')(this.codes.GIPHY)
-		this.gapi = this.codes.GAPI
+		this.giphy = require('giphy-api')(this.codes.GIPHY);
+		this.gapi = this.codes.GAPI;
 		this.youtubeSearch = require('youtube-search-promise');
 		this.yt_opts = {
 			maxResults: 8,
