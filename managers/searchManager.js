@@ -10,13 +10,13 @@ module.exports = class search extends Necessary {
 
 	constructor() {
 		super();
-		this.imgClient = new GoogleImages(this.codes.CSE, this.codes.API);
+		this.imgClient = new GoogleImages(this.codes.CSE, this.codes.GAPI);
 		this.giphy = require('giphy-api')(this.codes.GIPHY);
 		this.gapi = this.codes.GAPI;
 		this.youtubeSearch = require('youtube-search-promise');
 		this.yt_opts = {
 			maxResults: 8,
-			key: this.codes.YT,
+			key: this.codes.GAPI,
 		};
 	}
 
@@ -25,7 +25,7 @@ module.exports = class search extends Necessary {
 		this.imgClient.search(args, {page: 1})
 		.then((images) => {
 			if(images.length == 0) {
-				message.channel.send(this.embeds.alert("No results found."))
+				message.channel.send(this.embeds.alert("No results found."));
 				return;
 			}
 
@@ -33,12 +33,13 @@ module.exports = class search extends Necessary {
 			
 			this.dlog(images);
 
-			scroll.setGlobalScrollEmbeds(args, images, this.embeds.image, 20) // make this a setting!
+			scroll.setGlobalScrollEmbeds(args, images, this.embeds.image, 20);
+			// make this a setting!
 			message.channel.send(scroll.globalScrollEmbeds[0]).then((sentMessage) => {
 				scroll.globalScrollUpdateMessage = sentMessage;
 			});
 		})
-		.catch((err) => this.errorHandler(err, message))
+		.catch((err) => this.errorHandler(err, message));
 	}
 
 	// async imageScrape(message, args, scroll) {
