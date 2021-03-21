@@ -38,7 +38,6 @@ module.exports = class quotes extends Necessary {
 
 	}
 
-
 	quote(message, args, updater) {
 		var archiveChannel = message.guild.channels.find((channel) => channel.name.toLowerCase().includes("archive"));
 		if(archiveChannel == undefined) {

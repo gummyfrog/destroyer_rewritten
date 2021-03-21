@@ -1,4 +1,7 @@
-/* jshint esversion:6 */
+/* jshint esversion:8 */
+
+const gm = require('gm');
+const request = require('request');
 
 module.exports = class scroll {
 

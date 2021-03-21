@@ -1,6 +1,6 @@
 module.exports = {
-	name: 'Help',
-	description: 'Lists all commands.',
+	name: 'Managers',
+	description: 'Lists all managers.',
 	keys: ['m', 'managers'],
 	required: ["embeds", "managerList"],
 	execute(message, args, managers = {}) {

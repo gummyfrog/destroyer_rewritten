@@ -46,9 +46,14 @@ class Destroyer extends Necessary {
 			this.dlog(`${command.name}; ./commands/${file}`.bold);
 			for(var k=0; k<command.keys.length;k++) {
 				this.commands.set(command.keys[k], command);
-
 			}
-			this.help[`${command.name} **(${command.keys.join(' or ')})**`] = `⮑ ${command.description}`;
+
+			var command_info = `⮑ ${command.description}`;
+			if(command.example) {
+				command_info += `\ne.g: ${command.example}`;
+			}
+
+			this.help[`${command.name} **(${command.keys.join(' or ')})**`] = command_info;
 		});
 
 		// set client events
@@ -74,8 +79,6 @@ class Destroyer extends Necessary {
 			if(message.author.id === this.client.user.id) return;
 			if(process.env.DEBUG && message.guild.id != "352103491948511233") return;
 			if(!process.env.DEBUG && message.guild.id == "352103491948511233") return;
-
-			// this.managers.get('chatter').check(message);
 
 			this.dlog(`${message.author.tag} : ${message.content}`);
 			if(message.attachments.first()) {

@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'Scrub',
 	description: 'Shows a specific entry in the results list.',
+	example: 'd!sc 10',
 	keys: ['sc', 'scrub'],
 	required: ["scroll"],
 	execute(message, args, managers = {}) {

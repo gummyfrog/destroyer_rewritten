@@ -1,7 +1,7 @@
 module.exports = {
 	name: '8 Ball',
 	description: "Prophecy",
-	keys: ['ball'],
+	keys: ['ball', '8ball'],
 	required: ["embeds"],
 	execute(message, args, managers = {}) {
 		let prophecies = [

@@ -15,6 +15,7 @@
     "ffmpeg": "0.0.4",
     "ffmpeg-static": "^2.7.0",
     "giphy-api": "^2.0.1",
+    "gm": "^1.23.1",
     "google": "^2.1.0",
     "google-images": "^2.1.0",
     "js-markov": "^3.0.3",

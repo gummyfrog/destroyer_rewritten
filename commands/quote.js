@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'Quote',
 	description: 'Saves a message.',
+	example: 'd!q [word or phrase in a recent message], or d!q [message id], or d!q [@user]',
 	keys: ['q', 'quote'],
 	required: ["quotes", "updater"],
 	execute(message, args, managers = {}) {

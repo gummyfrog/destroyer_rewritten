@@ -38,6 +38,9 @@ module.exports = class search extends Necessary {
 			message.channel.send(scroll.globalScrollEmbeds[0]).then((sentMessage) => {
 				scroll.globalScrollUpdateMessage = sentMessage;
 			});
+
+			// send stitch embed
+
 		})
 		.catch((err) => this.errorHandler(err, message));
 	}
@@ -114,15 +117,6 @@ module.exports = class search extends Necessary {
 				scroll.globalScrollUpdateMessage = sentMessage
 			});
 		})
-		.catch((err) => this.errorHandler(err, message))
-	}
-
-	googleSearch(message, args, scroll) {
-		var url = (`https://www.googleapis.com/customsearch/v1?cx=destroyer-additional-search?key=${this.gapi}&q=${args}`)
-		axios.get(url)
-		.then((res) => {
-			message.channel.send(res);
-		}) 
 		.catch((err) => this.errorHandler(err, message))
 	}
 }
