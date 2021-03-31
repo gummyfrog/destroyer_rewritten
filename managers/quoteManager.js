@@ -1,12 +1,39 @@
-/* jshint esversion:6 */
+/* jshint esversion:8 */
 
 const Necessary = require('./necessary.js');
+const { Webhook, MessageBuilder } = require('discord-webhook-node');
+const imageDownloader = require('image-downloader');
 
 module.exports = class quotes extends Necessary {
 
 	constructor() {
 		super();
+		this.Hook = new Webhook("https://discord.com/api/webhooks/826610284059164713/s5DU4z2fXYNdSLbS53H-vAkEyCxe9wGAY2J6ku0vZqig_fi-Gm538kD4bVigjRKJLhwM")
 	}
+
+	webhookquote(quoteData) {	
+		this.Hook.setUsername(quoteData.name);
+		this.Hook.setAvatar(quoteData.avatar);
+
+		if(quoteData.message != "") {
+			this.Hook.send(quoteData.message);
+		}
+
+		for(var x=0;x<quoteData.attachments.length;x++) {
+			var attachment = quoteData.attachments[x];
+			var path = `./images/`;
+
+			imageDownloader.image({url: attachment.url, dest: path})
+			.then(({filename}) => {
+				this.Hook.sendFile(`${filename}`);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+
+		}
+	}
+
 
 	findMessage(message, args) {
 		var messages = message.channel.messages.array().reverse();
@@ -52,13 +79,14 @@ module.exports = class quotes extends Necessary {
 		var quoteData = {
 			name: searchedMsg.author.username,
 			message: searchedMsg.content,
-			attachments: searchedMsg.attachments,
+			attachments: searchedMsg.attachments.array(),
 			channelname: searchedMsg.channel.name,
 			time: searchedMsg.createdTimestamp,
 			avatar: searchedMsg.author.avatarURL,
 		};
 
-		updater.quote(quoteData);
+		this.webhookquote(quoteData);
+		// updater.quote(quoteData);
 
 	}
 

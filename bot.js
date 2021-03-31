@@ -81,13 +81,13 @@ class Destroyer extends Necessary {
 			if(!process.env.DEBUG && message.guild.id == "352103491948511233") return;
 
 			this.dlog(`${message.author.tag} : ${message.content}`);
-			if(message.attachments.first()) {
-				for(var a=0;a<message.attachments.array().length;a++) {
-					var attachment = message.attachments.array()[a];
-					console.log(`Taking a snapshot.\n${attachment.filename}`.bold.green);
-					this.managers.get('updater').download(attachment.url, attachment.filename);
-				}
-			}
+			// if(message.attachments.first()) {
+			// 	for(var a=0;a<message.attachments.array().length;a++) {
+			// 		var attachment = message.attachments.array()[a];
+			// 		console.log(`Taking a snapshot.\n${attachment.filename}`.bold.green);
+			// 		this.managers.get('updater').download(attachment.url, attachment.filename);
+			// 	}
+			// }
 
 			this.commandHandler(message);
 		});
