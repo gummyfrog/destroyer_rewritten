@@ -17,20 +17,15 @@
     "ffmpeg-static": "^2.7.0",
     "giphy-api": "^2.0.1",
     "gm": "^1.23.1",
-    "google": "^2.1.0",
     "google-images": "^2.1.0",
     "image-downloader": "^4.0.2",
-    "js-markov": "^3.0.3",
     "jsonfile": "^5.0.0",
     "lodash": "^4.17.20",
     "markov-generator": "^1.2.3",
     "markov-strings": "^2.1.1",
     "node-cleanup": "^2.1.2",
     "node-nlp": "^3.10.2",
-    "node-opus": "^0.3.3",
     "node-tesseract-ocr": "^0.1.0",
-    "puppeteer": "^5.5.0",
-    "translate-google": "^1.4.3",
     "youtube-search-promise": "^1.0.3"
   }
 }
