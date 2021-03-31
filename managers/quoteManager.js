@@ -72,9 +72,11 @@ module.exports = class quotes extends Necessary {
 		}
 
 		var searchedMsg = this.findMessage(message, args);
+		searchedMsg.react("730962744378916874");
 
-		message.channel.send("Ok, here's the quote.", this.embeds.quote(searchedMsg));
-		archiveChannel.send(this.embeds.quote(searchedMsg));
+
+		// message.channel.send("Ok, here's the quote.", this.embeds.quote(searchedMsg));
+		// archiveChannel.send(this.embeds.quote(searchedMsg));
 
 		var quoteData = {
 			name: searchedMsg.author.username,
