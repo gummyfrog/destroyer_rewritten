@@ -3,7 +3,6 @@
 const GoogleImages = require('google-images');
 const Necessary = require('./necessary.js');
 const axios = require('axios');
-const puppeteer = require('puppeteer');
 
 
 module.exports = class search extends Necessary {
