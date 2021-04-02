@@ -12,7 +12,7 @@ module.exports = class quotes extends Necessary {
 	}
 
 	webhookquote(quoteData) {	
-		this.Hook.setUsername(quoteData.name);
+		this.Hook.setUsername(`${quoteData.nickname} (${quoteData.tag})`);
 		this.Hook.setAvatar(quoteData.avatar);
 
 		if(quoteData.message != "") {
@@ -32,8 +32,12 @@ module.exports = class quotes extends Necessary {
 			});
 
 		}
-	}
 
+		// const embed = new MessageBuilder()
+		// .setTimestamp();
+
+		// this.Hook.send(embed);
+	}
 
 	findMessage(message, args) {
 		var messages = message.channel.messages.array().reverse();
@@ -66,36 +70,29 @@ module.exports = class quotes extends Necessary {
 	}
 
 	quote(message, args, updater) {
-		var archiveChannel = message.guild.channels.find((channel) => channel.name.toLowerCase().includes("archive"));
-		if(archiveChannel == undefined) {
-			return;
-		}
-
 		var searchedMsg = this.findMessage(message, args);
 		searchedMsg.react("730962744378916874");
 
-
 		// message.channel.send("Ok, here's the quote.", this.embeds.quote(searchedMsg));
-		// archiveChannel.send(this.embeds.quote(searchedMsg));
 
 		var quoteData = {
 			name: searchedMsg.author.username,
+			nickname: searchedMsg.member.nickname,
 			message: searchedMsg.content,
+			url: searchedMsg.url,
 			attachments: searchedMsg.attachments.array(),
 			channelname: searchedMsg.channel.name,
+			tag: searchedMsg.author.tag,
 			time: searchedMsg.createdTimestamp,
 			avatar: searchedMsg.author.avatarURL,
 		};
 
 		this.webhookquote(quoteData);
-		// updater.quote(quoteData);
-
 	}
 
 	reference(message, args) {
 		var searchedMsg = this.findMessage(message, args);
 		message.channel.send(this.embeds.reference(searchedMsg));
-
 	}
 };
 
