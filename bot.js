@@ -5,6 +5,8 @@ const nodeCleanup = require('node-cleanup');
 const colors = require('colors');
 const json = require('jsonfile');
 const fs = require('fs');
+const metrics = require('datadog-metrics');
+metrics.init({ host: 'FREERANGE1', prefix: 'jordan.' });
 
 // var urban = require('urban.js');
 // var probe = require('probe-image-size');
@@ -18,6 +20,8 @@ class Destroyer extends Necessary {
 	constructor() {
 		super();
 		this.dlog(`Making a new Destroyer.`);
+
+		metrics.increment("restarts");
 
 		this.client = new Discord.Client();
 		this.commands = new Discord.Collection();
@@ -38,7 +42,6 @@ class Destroyer extends Necessary {
 		this.managers.set("setConfig", this.setConfig);
 		this.managers.set("help", this.help);
 		this.managers.set("managerList", this.managerList);
-		
 		console.log(`${this.managers.array().length} Total Managers Loaded Successfully.`.bold);
 
 		fs.readdirSync('./commands').filter(file => file.endsWith('.js')).map((file) => {
@@ -72,7 +75,6 @@ class Destroyer extends Necessary {
 					url: "https://www.youtube.com/watch?v=n2Ielk8KsK4"
 				}
 			});
-
 		});
 
 		this.client.on("message", (message) => {
@@ -174,10 +176,12 @@ class Destroyer extends Necessary {
 
 				if(toExecute.required) {
 					toExecute.required.map( (required) => {
+						metrics.increment(`commands.${required}`);
 						requiredObject[required] = this.managers.get(required);
 					});
 				}
-
+				
+				metrics.increment("commands.total");
 				toExecute.execute(message, args, requiredObject);
 			}
 			catch(err) {
@@ -191,4 +195,17 @@ class Destroyer extends Necessary {
 }
 
 var jordan = new Destroyer();
+
+
+// memory tracking test
+
+function collectMemoryStats() {
+    var memUsage = process.memoryUsage();
+    metrics.gauge('memory.rss', memUsage.rss);
+    metrics.gauge('memory.heapTotal', memUsage.heapTotal);
+    metrics.gauge('memory.heapUsed', memUsage.heapUsed);
+    metrics.increment('memory.statsReported');
+}
+
+setInterval(collectMemoryStats, 5000);
 

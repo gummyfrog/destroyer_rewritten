@@ -14,7 +14,7 @@ module.exports = class embeds {
 			this.monocolor(16728663);
 		}
 	}
-	
+
 	refresh(config) {
 		this.colors = Object.assign({
 			leaderboard: 16763981, // #ffcc4d
@@ -190,23 +190,25 @@ module.exports = class embeds {
 	}
 
 	video(data, indexIndicator = "") {
-		var embed = {
-			title: `${data.title} ${indexIndicator}`,
-			color: this.colors.video,
-			author: {
-				name: data.channelTitle,
-				icon_url: "https://cdn1.iconfinder.com/data/icons/logotypes/32/youtube-512.png",
-			},
-			thumbnail: {
-				url: `https://img.youtube.com/vi/${data.id}/maxresdefault.jpg`,
-			},
-			fields: [{
-				name: data.link,
-				value: data.description || "...",
-			}]
-		};
+		// var embed = {
+		// 	title: `${data.title} ${indexIndicator}`,
+		// 	color: this.colors.video,
+		// 	author: {
+		// 		name: data.channelTitle,
+		// 		icon_url: "https://cdn1.iconfinder.com/data/icons/logotypes/32/youtube-512.png",
+		// 	},
+		// 	image: {
+		// 		url: `https://img.youtube.com/vi/${data.id}/maxresdefault.jpg`,
+		// 	},
+		// 	fields: [{
+		// 		name: data.link,
+		// 		value: data.description || "...",
+		// 	}]
+		// };
 
-		return({"embed":embed});
+		// youtube makes its own embeds!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
+		return({"content": data.link});
 	}
 
 	// no binding required
