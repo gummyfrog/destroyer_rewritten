@@ -69,10 +69,10 @@ class Destroyer extends Necessary {
 			}
 			this.dlog("Verbose is Enabled.");
 			this.client.user.setPresence({
-				game: {
+				activity: {
 					name: `Jordan ${this.package.version}`,
-					type: "Streaming",
-					url: "https://www.youtube.com/watch?v=n2Ielk8KsK4"
+					type: "STREAMING",
+					url: "https://www.youtube.com/watch?v=EwdWgAMYcqk4"
 				}
 			});
 		});
