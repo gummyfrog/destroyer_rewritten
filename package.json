@@ -12,7 +12,7 @@
     "axios": ">=0.21.1",
     "colors": "^1.4.0",
     "discord-webhook-node": "^1.1.8",
-    "discord.js": "^11.6.4",
+    "discord.js": "^12.5.3",
     "ffmpeg": "0.0.4",
     "ffmpeg-static": "^2.7.0",
     "giphy-api": "^2.0.1",

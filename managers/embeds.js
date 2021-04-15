@@ -5,7 +5,6 @@ module.exports = class embeds {
 	constructor(opt = {}) {
 		this.colors = {};
 		this.refresh(opt);
-		this.quote = this.quote.bind(this);
 		this.reference = this.reference.bind(this);
 		this.image = this.image.bind(this);
 		this.gif = this.gif.bind(this);
@@ -15,14 +14,13 @@ module.exports = class embeds {
 			this.monocolor(16728663);
 		}
 	}
-
+	
 	refresh(config) {
 		this.colors = Object.assign({
-			quote: 6482943, // #62EBFF
 			leaderboard: 16763981, // #ffcc4d
 			list: 8640595, // #83d853
-			video: 10041553, // #9938D1
-			image: 14707627, // #e06bab
+			video: 13632027, // #D0021B
+			image: 14707627, // #E06BAB
 			warn: 16728663, // #B52F49
 			reference: 10526880, // #7FA864
 		}, config);
@@ -103,34 +101,34 @@ module.exports = class embeds {
 
 	// used lazy binding for these :( fix later
 
-	quote(msg) {
-		var filename = msg.author.avatarURL.substring(0, msg.author.avatarURL.indexOf('?')).replace(/\D/g,'');
-		var author = msg.author;
-		var authId = `${author.id}`;
-		var embed = {
-			description:  msg.content,
-			color: this.colors.quote,
-			thumbnail: {
-				url: "https://media.discordapp.net/attachments/348636325471059978/514654174491836416/Untitled1.png"
-			},
-			author: {
-				name: author.username,
-				icon_url: `http://frogeye.duckdns.org:8282/images/${filename}.png`
-			},
-		};
+	// quote(msg) {
+	// 	var filename = msg.author.avatarURL.substring(0, msg.author.avatarURL.indexOf('?')).replace(/\D/g,'');
+	// 	var author = msg.author;
+	// 	var authId = `${author.id}`;
+	// 	var embed = {
+	// 		description:  msg.content,
+	// 		color: this.colors.quote,
+	// 		thumbnail: {
+	// 			url: "https://media.discordapp.net/attachments/348636325471059978/514654174491836416/Untitled1.png"
+	// 		},
+	// 		author: {
+	// 			name: author.username,
+	// 			icon_url: `http://frogeye.duckdns.org:8282/images/${filename}.png`
+	// 		},
+	// 	};
 
-		if(msg.attachments.size >= 1) {    
-			embed.image = {
-				url: msg.attachments.first().url
-			};
-		}
+	// 	if(msg.attachments.size >= 1) {    
+	// 		embed.image = {
+	// 			url: msg.attachments.first().url
+	// 		};
+	// 	}
 
-		if(msg.embeds.length >= 1) {
-			embed = msg.embeds[0];
-		}
+	// 	if(msg.embeds.length >= 1) {
+	// 		embed = msg.embeds[0];
+	// 	}
 
-		return({"embed":embed});
-	}
+	// 	return({"embed":embed});
+	// }
 
 
 	reference(msg) {

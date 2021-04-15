@@ -28,7 +28,7 @@ module.exports = class search extends Necessary {
 				return;
 			}
 
-			images = images.map(img => {return {url: img.url, link: img.parentPage}});
+			images = images.map(img => {return {url: img.url, link: img.parentPage};});
 			
 			this.dlog(images);
 
@@ -36,6 +36,7 @@ module.exports = class search extends Necessary {
 			// make this a setting!
 			message.channel.send(scroll.globalScrollEmbeds[0]).then((sentMessage) => {
 				scroll.globalScrollUpdateMessage = sentMessage;
+				scroll.makeReactionHandler();
 			});
 
 			// send stitch embed
@@ -85,19 +86,20 @@ module.exports = class search extends Necessary {
 		this.youtubeSearch(args, this.yt_opts)
 		.then((res) => {
 			if(res.length == 0) {
-				message.channel.send(this.embeds.alert("No results found."))
+				message.channel.send(this.embeds.alert("No results found."));
 				return;
 			}
-			res = res.map(obj => {if(obj.kind == "youtube#video") return obj});
+			res = res.map(obj => {if(obj.kind == "youtube#video") return obj;});
 			res = res.filter((e) => {
 				return e != undefined;
 			});
-			scroll.setGlobalScrollEmbeds(args, res, this.embeds.video, 20)
+			scroll.setGlobalScrollEmbeds(args, res, this.embeds.video, 20);
 			message.channel.send(scroll.globalScrollEmbeds[0]).then((sentMessage) => {
-				scroll.globalScrollUpdateMessage = sentMessage
+				scroll.globalScrollUpdateMessage = sentMessage;
+				scroll.makeReactionHandler();
 			});
 		})
-		.catch((err) => this.errorHandler(err, message))
+		.catch((err) => this.errorHandler(err, message));
 	}	
 
 	giphySearch(message, args, scroll) {
@@ -105,17 +107,18 @@ module.exports = class search extends Necessary {
 		this.giphy.search(args)
 		.then((res) => {
 			if(res.data.length == 0) {
-				message.channel.send(this.embeds.alert("No results found."))
+				message.channel.send(this.embeds.alert("No results found."));
 				return;
 			}
 
-			res = res.data.map(obj => {return obj.images.original.url})
+			res = res.data.map(obj => {return obj.images.original.url;});
 
-			scroll.setGlobalScrollEmbeds(args, res, this.embeds.gif, 20)
+			scroll.setGlobalScrollEmbeds(args, res, this.embeds.gif, 20);
 			message.channel.send(scroll.globalScrollEmbeds[0]).then((sentMessage) => {
-				scroll.globalScrollUpdateMessage = sentMessage
+				scroll.globalScrollUpdateMessage = sentMessage;
+				scroll.makeReactionHandler();
 			});
 		})
-		.catch((err) => this.errorHandler(err, message))
+		.catch((err) => this.errorHandler(err, message));
 	}
-}
+};

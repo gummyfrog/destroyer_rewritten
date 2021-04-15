@@ -30,12 +30,10 @@ module.exports = class quotes extends Necessary {
 			.catch((err) => {
 				console.log(err);
 			});
-
 		}
 
 		// const embed = new MessageBuilder()
 		// .setTimestamp();
-
 		// this.Hook.send(embed);
 	}
 
@@ -74,6 +72,7 @@ module.exports = class quotes extends Necessary {
 		searchedMsg.react("730962744378916874");
 
 		// message.channel.send("Ok, here's the quote.", this.embeds.quote(searchedMsg));
+		// should remove unused properties at some point
 
 		var quoteData = {
 			name: searchedMsg.author.username,
