@@ -23,7 +23,9 @@ class Destroyer extends Necessary {
 
 		metrics.increment("restarts");
 
-		this.client = new Discord.Client();
+		this.client = new Discord.Client({
+		    ws: { intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_PRESENCES", "GUILD_WEBHOOKS"] }
+		});
 		this.commands = new Discord.Collection();
 		this.managers = new Discord.Collection();
 		this.help = {};

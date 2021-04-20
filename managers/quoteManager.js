@@ -13,6 +13,7 @@ module.exports = class quotes extends Necessary {
 
 	webhookquote(quoteData) {	
 		this.Hook.setUsername(`${quoteData.nickname} (${quoteData.tag})`);
+
 		this.Hook.setAvatar(quoteData.avatar);
 
 		if(quoteData.message != "") {
@@ -38,7 +39,7 @@ module.exports = class quotes extends Necessary {
 	}
 
 	findMessage(message, args) {
-		var messages = message.channel.messages.array().reverse();
+		var messages = message.channel.messages.cache.array().reverse();
 		var searchedMsg;
 		var eMsg = "Couldn't find anything.";
 
@@ -55,13 +56,15 @@ module.exports = class quotes extends Necessary {
 		} else {
 			searchedMsg = messages.find((m) => m.content.toLowerCase().includes(args));
 			eMsg = "I couldn't find anything in my cache with that word in it.";
-		}	
+		}
 
 		// just turn this into a promise
+		// ^ this is wise. past me is pretty wise, i think.
 
 		if(searchedMsg != undefined) {
 			return(searchedMsg);
 		} else {
+			message.channel.send(this.embeds.error(eMsg));
 			return(undefined);
 		}
 
@@ -69,6 +72,12 @@ module.exports = class quotes extends Necessary {
 
 	quote(message, args, updater) {
 		var searchedMsg = this.findMessage(message, args);
+
+		if(searchedMsg == undefined) {
+			return;
+		}
+		// !!!!!!!!!!!!!!!!!!! add check for if the message is found right here  !!!!!!!!!!!!!!!!!!!!!!
+
 		searchedMsg.react("730962744378916874");
 
 		// message.channel.send("Ok, here's the quote.", this.embeds.quote(searchedMsg));
@@ -83,7 +92,7 @@ module.exports = class quotes extends Necessary {
 			channelname: searchedMsg.channel.name,
 			tag: searchedMsg.author.tag,
 			time: searchedMsg.createdTimestamp,
-			avatar: searchedMsg.author.avatarURL,
+			avatar: searchedMsg.author.avatarURL(),
 		};
 
 		this.webhookquote(quoteData);
