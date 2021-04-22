@@ -4,6 +4,7 @@ module.exports = class embeds {
 
 	constructor(opt = {}) {
 		this.colors = {};
+		this.errtitles = ["hold up!", "woah!", "oops!", "oopsie woopsie", "augh...", "ouch!", "youch!", "cringe"];
 		this.refresh(opt);
 		this.reference = this.reference.bind(this);
 		this.image = this.image.bind(this);
@@ -301,9 +302,10 @@ module.exports = class embeds {
 	}
 
 	error(msg) {
+		var random_title = this.errtitles[Math.floor(Math.random() * this.errtitles.length)] + " 🛑✋";
 		var embed = {
-			title: "🛑✋",
-			description: `**${msg}**`,
+			title: random_title,
+			description: `*${msg}*`,
 			color: this.colors.warn
 		};
 

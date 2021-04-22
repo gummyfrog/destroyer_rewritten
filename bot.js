@@ -24,7 +24,7 @@ class Destroyer extends Necessary {
 		metrics.increment("restarts");
 
 		this.client = new Discord.Client({
-		    ws: { intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_PRESENCES", "GUILD_WEBHOOKS"] }
+		    ws: { intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_PRESENCES", "GUILD_WEBHOOKS", "GUILD_MESSAGE_REACTIONS"] }
 		});
 		this.commands = new Discord.Collection();
 		this.managers = new Discord.Collection();
@@ -85,14 +85,6 @@ class Destroyer extends Necessary {
 			if(!process.env.DEBUG && message.guild.id == "352103491948511233") return;
 
 			this.dlog(`${message.author.tag} : ${message.content}`);
-			// if(message.attachments.first()) {
-			// 	for(var a=0;a<message.attachments.array().length;a++) {
-			// 		var attachment = message.attachments.array()[a];
-			// 		console.log(`Taking a snapshot.\n${attachment.filename}`.bold.green);
-			// 		this.managers.get('updater').download(attachment.url, attachment.filename);
-			// 	}
-			// }
-
 			this.commandHandler(message);
 		});
 
@@ -154,7 +146,8 @@ class Destroyer extends Necessary {
 
 	commandHandler(message) {
 		if(message.content.substring(0, this.getConfig().prefix.length).toLowerCase() != this.getConfig().prefix) return;
-
+		if(message.webhookID) return;
+		
 		var command = message.content.toLowerCase().substring(this.getConfig().prefix.length).split(' ')[0];
 		var args = message.content.toLowerCase().substring(this.getConfig().prefix.length + command.length + 1).toLowerCase();  
 		var author = message.author;
@@ -162,7 +155,7 @@ class Destroyer extends Necessary {
 		if(message.guild === null) {
 			// direct message
 			console.log(`From "${message.author.username}"`.yellow);
-			message.channel.send("sorry, use me in a channel or don't use me at all B) B) marry me?");
+			message.channel.send("use me in a channel or don't use me at all, cringe idiot");
 			return;
 		} else {
 			this.dlog(`From "${message.guild.name}"`.green);
