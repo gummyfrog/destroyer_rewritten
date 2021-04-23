@@ -53,12 +53,12 @@ module.exports = class scroll {
 		this.globalScrollUpdateMessage.react(this.emojis[0]);
 
 		var filter = (reaction, user) => {
-			return user.id != this.globalScrollUpdateMessage.author.id;
+			return this.emojis.includes(reaction.emoji.name) && user.id != this.globalScrollUpdateMessage.author.id;
 		};
 
-		var reaction_collector = this.globalScrollUpdateMessage.createReactionCollector(filter, { time: 600000 });
-
-		reaction_collector.on('collect', reaction => {
+		this.globalScrollUpdateMessage.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+		.then(collected => {
+			const reaction = collected.first();
 
 			if (reaction.emoji.name == this.emojis[0]) {
 				this.getOffsetGlobalScrollIndex(1);
@@ -67,11 +67,13 @@ module.exports = class scroll {
 				this.getOffsetGlobalScrollIndex(-1);
 				this.makeReactionHandler();
 			}
-		});
 
-		reaction_collector.on('end', collected => {
-			// end peacefully...
+		})
+		.catch(err => {
+			console.log(err);
+			console.log("collector timed out");
 		});
+	
 	}
 
 };
