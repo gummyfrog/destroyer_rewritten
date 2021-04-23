@@ -40,6 +40,7 @@ module.exports = class scroll {
 
 		this.globalScrollIndex += by;
 		this.globalScrollUpdateMessage.edit(this.globalScrollEmbeds[this.globalScrollIndex]);
+		this.makeReactionHandler();
 	}
 
 	getIndexIndicator(title, i, cap) {
