@@ -72,7 +72,7 @@ class Destroyer extends Necessary {
 			this.dlog("Verbose is Enabled.");
 			this.client.user.setPresence({
 				activity: {
-					name: `Jordan ${this.package.version}`,
+					name: `Jordan ${this.package.version} :)`,
 					type: "STREAMING",
 					url: "https://www.youtube.com/watch?v=EwdWgAMYcqk4"
 				}
