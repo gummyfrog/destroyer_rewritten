@@ -17,6 +17,7 @@ module.exports = class search extends Necessary {
 			maxResults: 8,
 			key: this.codes.GAPI,
 		};
+
 	}
 
 	imageSearch(message, args, scroll) {	
@@ -34,9 +35,10 @@ module.exports = class search extends Necessary {
 
 			scroll.setGlobalScrollEmbeds(args, images, this.embeds.image, 20);
 			// make this a setting!
-			message.channel.send(scroll.globalScrollEmbeds[0]).then((sentMessage) => {
+
+			message.channel.send(scroll.createMessage()).then((sentMessage) => {
 				scroll.globalScrollUpdateMessage = sentMessage;
-				scroll.makeReactionHandler();
+				scroll.makeButtonHandler();
 			});
 
 			// send stitch embed
@@ -94,9 +96,10 @@ module.exports = class search extends Necessary {
 				return e != undefined;
 			});
 			scroll.setGlobalScrollEmbeds(args, res, this.embeds.video, 20);
-			message.channel.send(scroll.globalScrollEmbeds[0]).then((sentMessage) => {
+			message.channel.send(scroll.createMessage()).then((sentMessage) => {
 				scroll.globalScrollUpdateMessage = sentMessage;
-				scroll.makeReactionHandler();
+				scroll.makeButtonHandler();
+
 			});
 		})
 		.catch((err) => this.errorHandler(err, message));
@@ -114,9 +117,9 @@ module.exports = class search extends Necessary {
 			res = res.data.map(obj => {return obj.images.original.url;});
 
 			scroll.setGlobalScrollEmbeds(args, res, this.embeds.gif, 20);
-			message.channel.send(scroll.globalScrollEmbeds[0]).then((sentMessage) => {
+			message.channel.send(scroll.createMessage()).then((sentMessage) => {
 				scroll.globalScrollUpdateMessage = sentMessage;
-				scroll.makeReactionHandler();
+				scroll.makeButtonHandler();
 			});
 		})
 		.catch((err) => this.errorHandler(err, message));

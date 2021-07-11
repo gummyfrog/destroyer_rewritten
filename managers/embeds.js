@@ -128,7 +128,7 @@ module.exports = class embeds {
 	// 		embed = msg.embeds[0];
 	// 	}
 
-	// 	return({"embed":embed});
+	// 	return({"embeds":[embed]});
 	// }
 
 
@@ -158,7 +158,7 @@ module.exports = class embeds {
 			embed = msg.embeds[0];
 		}
 
-		return({"embed":embed});
+		return({"embeds":[embed]});
 	}
 
 
@@ -175,7 +175,7 @@ module.exports = class embeds {
 			}
 		};
 
-		return({"embed":embed});
+		return({"embeds":[embed]});
 	}
 
 	gif(url, indexIndicator = "") {
@@ -187,7 +187,7 @@ module.exports = class embeds {
 			}
 		};
 
-		return({"embed":embed});
+		return({"embeds":[embed]});
 	}
 
 	video(data, indexIndicator = "") {
@@ -221,7 +221,7 @@ module.exports = class embeds {
 			color: this.colors.video
 		};
 
-		return({"embed":embed});
+		return({"embeds":[embed]});
 	}
 
 
@@ -261,7 +261,7 @@ module.exports = class embeds {
 			return field;
 		});
 
-		return({"embed":embed});
+		return({"embeds":[embed]});
 	}
 
 	vote() {
@@ -271,7 +271,7 @@ module.exports = class embeds {
 			color: this.colors.warn,
 		};
 
-		return({"embed":embed});
+		return({"embeds":[embed]});
 	}
 
 	cancelledVote(count) {
@@ -287,7 +287,7 @@ module.exports = class embeds {
 			color: this.colors.leaderboard,
 		};
 
-		return({"embed":embed});
+		return({"embeds":[embed]});
 	}
 
 
@@ -298,7 +298,7 @@ module.exports = class embeds {
 			color: this.colors.leaderboard
 		};
 
-		return({"embed":embed});
+		return({"embeds":[embed]});
 	}
 
 	error(msg) {
@@ -309,7 +309,7 @@ module.exports = class embeds {
 			color: this.colors.warn
 		};
 
-		return({"embed":embed});
+		return({"embeds":[embed]});
 	}
 
 	translation(original, res) {
@@ -319,34 +319,34 @@ module.exports = class embeds {
 			color: this.colors.list
 		};
 
-		return({"embed":embed});
+		return({"embeds":[embed]});
 	}
 
 	config(configObject) {
 		console.log(configObject);
 		var embed = this.arbitraryObjectDisplay(configObject);
 		embed.title = "Config";
-		return({"embed":embed});
+		return({"embeds":[embed]});
 	}
 
 	help(helpObject) {
 		var embed = this.arbitraryObjectDisplay(helpObject);
 		embed.title = "Jordan 2.0b Help Menu";
 		embed.inline = true;
-		return({"embed":embed});
+		return({"embeds":[embed]});
 	}
 
 	status(statusObject) {
 		console.log(statusObject);
 		var embed = this.arbitraryObjectDisplay(statusObject, ["status", "last", "last-search"]);
 		embed.title = "What's Up?";
-		return({"embed":embed});
+		return({"embeds":[embed]});
 	}
 
 	leaderboardList(statsObject) {
 		var embed = this.arbitraryObjectDisplay(statsObject, ["titles", "data"]);
 		embed.title = "Tracked Stats";
-		return({"embed":embed});
+		return({"embeds":[embed]});
 	}
 
 };

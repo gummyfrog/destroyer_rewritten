@@ -24,7 +24,7 @@ class Destroyer extends Necessary {
 		metrics.increment("restarts");
 
 		this.client = new Discord.Client({
-		    ws: { intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_PRESENCES", "GUILD_WEBHOOKS", "GUILD_MESSAGE_REACTIONS"] }
+		    intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_PRESENCES", "GUILD_WEBHOOKS", "GUILD_MESSAGE_REACTIONS"]
 		});
 		this.commands = new Discord.Collection();
 		this.managers = new Discord.Collection();
@@ -79,7 +79,7 @@ class Destroyer extends Necessary {
 			});
 		});
 
-		this.client.on("message", (message) => {
+		this.client.on("messageCreate", (message) => {
 			if(message.author.id === this.client.user.id) return;
 			if(process.env.DEBUG && message.guild.id != "352103491948511233") return;
 			if(!process.env.DEBUG && message.guild.id == "352103491948511233") return;
@@ -88,7 +88,7 @@ class Destroyer extends Necessary {
 			this.commandHandler(message);
 		});
 
-		this.dlog("Waiting for Discord...");
+		this.dlog("Waiting for discord...");
 		this.client.login(this.codes.token);
 	}
 
