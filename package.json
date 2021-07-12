@@ -4,7 +4,7 @@
   "description": "",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +24,7 @@
     "lodash": "^4.17.20",
     "markov-generator": "^1.2.3",
     "markov-strings": "^2.1.1",
+    "mocha": "^9.0.2",
     "node-cleanup": "^2.1.2",
     "node-nlp": "^3.10.2",
     "node-tesseract-ocr": "^0.1.0",

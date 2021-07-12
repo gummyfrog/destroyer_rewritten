@@ -5,8 +5,6 @@ const nodeCleanup = require('node-cleanup');
 const colors = require('colors');
 const json = require('jsonfile');
 const fs = require('fs');
-const metrics = require('datadog-metrics');
-metrics.init({ host: 'FREERANGE1', prefix: 'jordan.' });
 
 // var urban = require('urban.js');
 // var probe = require('probe-image-size');
@@ -20,8 +18,6 @@ class Destroyer extends Necessary {
 	constructor() {
 		super();
 		this.dlog(`Making a new Destroyer.`);
-
-		metrics.increment("restarts");
 
 		this.client = new Discord.Client({
 		    intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_PRESENCES", "GUILD_WEBHOOKS", "GUILD_MESSAGE_REACTIONS"]
@@ -171,12 +167,10 @@ class Destroyer extends Necessary {
 
 				if(toExecute.required) {
 					toExecute.required.map( (required) => {
-						metrics.increment(`commands.${required}`);
 						requiredObject[required] = this.managers.get(required);
 					});
 				}
 				
-				metrics.increment("commands.total");
 				toExecute.execute(message, args, requiredObject);
 			}
 			catch(err) {
@@ -190,17 +184,3 @@ class Destroyer extends Necessary {
 }
 
 var jordan = new Destroyer();
-
-
-// memory tracking test
-
-function collectMemoryStats() {
-    var memUsage = process.memoryUsage();
-    metrics.gauge('memory.rss', memUsage.rss);
-    metrics.gauge('memory.heapTotal', memUsage.heapTotal);
-    metrics.gauge('memory.heapUsed', memUsage.heapUsed);
-    metrics.increment('memory.statsReported');
-}
-
-setInterval(collectMemoryStats, 5000);
-

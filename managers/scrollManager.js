@@ -71,36 +71,6 @@ module.exports = class scroll {
 		return(`${title} ${i+1} / ${cap}`);
 	}
 
-	// makeReactionHandler() {
-	// 	this.globalScrollUpdateMessage.reactions.removeAll();
-
-	// 	this.globalScrollUpdateMessage.react(this.emojis[1]);
-	// 	this.globalScrollUpdateMessage.react(this.emojis[0]);
-
-	// 	var filter = (reaction, user) => {	
-	// 		return this.emojis.includes(reaction.emoji.name) && user.id != this.globalScrollUpdateMessage.author.id;
-	// 	};
-
-	// 	this.globalScrollUpdateMessage.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
-	// 	.then(collected => {
-	// 		const reaction = collected.first();
-
-	// 		if (reaction.emoji.name == this.emojis[0]) {
-	// 			this.getOffsetGlobalScrollIndex(1);
-	// 			this.makeReactionHandler();
-	// 		} else {
-	// 			this.getOffsetGlobalScrollIndex(-1);
-	// 			this.makeReactionHandler();
-	// 		}
-
-	// 	})
-	// 	.catch(err => {
-	// 		console.log(err);
-	// 		console.log("collector timed out");
-	// 	});
-	
-	// }
-
 	makeButtonHandler() {
 		const filter = (interaction) => true;
 
@@ -109,7 +79,6 @@ module.exports = class scroll {
 		collector.on("collect", interaction => {
 			console.log(interaction);
 
-			// interaction.defer()
 			if(interaction.customId == "next") {
 				interaction.update(this.getOffsetGlobalScrollIndex(1))
 			} else if (interaction.customId == "back") {

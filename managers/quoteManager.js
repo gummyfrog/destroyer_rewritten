@@ -17,7 +17,6 @@ module.exports = class quotes extends Necessary {
 
 	webhookquote(quoteData) {	
 		this.Hook.setUsername(`${quoteData.nickname} (${quoteData.tag})`);
-
 		this.Hook.setAvatar(quoteData.avatar);
 
 		if(quoteData.message != "") {
@@ -36,10 +35,6 @@ module.exports = class quotes extends Necessary {
 				console.log(err);
 			});
 		}
-
-		// const embed = new MessageBuilder()
-		// .setTimestamp();
-		// this.Hook.send(embed);
 	}
 
 	findMessage(message, args) {
@@ -81,7 +76,7 @@ module.exports = class quotes extends Necessary {
 		});
 	}
 
-	quote(message, args, updater) {
+	quote(message, args) {
 		this.findMessage(message, args)
 		.then(searchedMsg => {
 			if(searchedMsg.webhookID) return;
