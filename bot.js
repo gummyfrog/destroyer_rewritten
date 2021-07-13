@@ -66,13 +66,13 @@ class Destroyer extends Necessary {
 				this.dlog("Debug Mode is Enabled");
 			}
 			this.dlog("Verbose is Enabled.");
-			this.client.user.setPresence([{
-				activity: {
+
+			this.client.user.setPresence({ activities: [{
 					name: `Jordan ${this.package.version} :)`,
 					type: "STREAMING",
-					url: "https://www.youtube.com/watch?v=EwdWgAMYcqk4"
-				}
-			}]);
+					url: "https://www.youtube.com/watch?v=PVcCTZHOl4U"
+			}]});
+
 		});
 
 		this.client.on("messageCreate", (message) => {
