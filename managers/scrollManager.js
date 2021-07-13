@@ -71,6 +71,9 @@ module.exports = class scroll {
 		return(`${title} ${i+1} / ${cap}`);
 	}
 
+
+	// ONLY USED FOR OLD-SYNTAX IMAGE SEARCH
+	// CAN BE REMOVED ONCE WE STOP USING IT ALL TOGETHER
 	makeButtonHandler() {
 		const filter = (interaction) => true;
 

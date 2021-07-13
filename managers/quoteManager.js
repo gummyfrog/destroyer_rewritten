@@ -10,12 +10,14 @@ module.exports = class quotes extends Necessary {
 		super();
 
 		this.Hook = new Webhook("https://discord.com/api/webhooks/826610284059164713/s5DU4z2fXYNdSLbS53H-vAkEyCxe9wGAY2J6ku0vZqig_fi-Gm538kD4bVigjRKJLhwM");
+
 		if(process.env.DEBUG) {
 			this.Hook = new Webhook("https://discord.com/api/webhooks/834626255885959168/u3yUYycz67GuE2cEXG669iAfQboVG-a1TdfftQxM0RryuizQHqjbliojtBwPqAoNraah");
 		}
 	}
 
 	webhookquote(quoteData) {	
+		console.log(quoteData);
 		this.Hook.setUsername(`${quoteData.nickname} (${quoteData.tag})`);
 		this.Hook.setAvatar(quoteData.avatar);
 
@@ -76,6 +78,7 @@ module.exports = class quotes extends Necessary {
 		});
 	}
 
+
 	quote(message, args) {
 		this.findMessage(message, args)
 		.then(searchedMsg => {
@@ -103,6 +106,83 @@ module.exports = class quotes extends Necessary {
 		})
 		.catch(error => {
 			message.channel.send(this.embeds.error(error));
+		});
+	}
+
+
+
+
+
+
+	findMessageInteraction(interaction) {
+		console.log(interaction)
+		const options = interaction.options;
+
+		return new Promise((resolve, reject) => {
+			if (options.has('id')) 
+			{
+				interaction.channel.messages.fetch(options.get("id").value)
+				.then(msg => {
+					resolve(msg);
+				})
+				.catch(err => {
+					reject(`Couldn't find a message with ID ${args}`);
+				});
+
+			} else {
+				var eMsg = "Unknown Error";
+				var searchedMsg;
+				var messages = interaction.channel.messages.cache.array().reverse(); 
+
+				if(options.array().length == 0) {
+					reject("no options provided!");
+				} else if(options.has('user')) {
+					searchedMsg = messages.find((m) => m.author.id == options.get('user').value);
+					eMsg = "Couldn't find any messages published by that user in my cache.";
+				} else {
+					searchedMsg = messages.find((m) => m.content.toLowerCase().includes(options.get('phrase').value.toLowerCase()));
+					eMsg = "I couldn't find anything in my cache with that word in it.";
+				}
+
+
+
+				if(searchedMsg != undefined) {
+					resolve(searchedMsg);
+				} else {
+					reject(eMsg);
+				}
+			}
+		});
+	}
+
+
+	quoteInteraction(interaction) {
+		this.findMessageInteraction(interaction)
+		.then(searchedMsg => {
+			if(searchedMsg.webhookID) return;
+
+			searchedMsg.react("730962744378916874");
+
+			var quoteData = {
+				name: searchedMsg.author.username,
+				nickname: searchedMsg.member.nickname,
+				message: searchedMsg.content,
+				url: searchedMsg.url,
+				attachments: searchedMsg.attachments.array(),
+				channelname: searchedMsg.channel.name,
+				tag: searchedMsg.author.tag,
+				time: searchedMsg.createdTimestamp,
+				avatar: searchedMsg.author.avatarURL(),
+			};
+
+			this.webhookquote(quoteData);
+			interaction.reply(this.embeds.success(""))
+
+		})
+		.catch(error => {
+			// fail silently
+			console.error(error);
+			interaction.reply(this.embeds.error(error));
 		});
 	}
 

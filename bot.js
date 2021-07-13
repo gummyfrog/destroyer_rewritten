@@ -84,8 +84,74 @@ class Destroyer extends Necessary {
 			this.commandHandler(message);
 		});
 
+		this.client.on('interactionCreate', interaction => {
+			console.log(interaction);
+			// commandHandler(interaction.name)
+
+			if(interaction.isButton()) {
+
+				if(interaction.customId == "next") {
+					interaction.update(this.managers.get("scroll").getOffsetGlobalScrollIndex(1))
+
+				} else if(interaction.customId == "back") {
+					interaction.update(this.managers.get("scroll").getOffsetGlobalScrollIndex(-1))
+				}
+
+			} else {
+				if(interaction.commandName == "quote") {
+					this.managers.get("quotes").quoteInteraction(interaction);
+				}
+
+				if(interaction.commandName == "search") {
+					this.interaction_wait(interaction);
+					this.managers.get("search").imageSearchInteraction(this.client, interaction, this.managers.get("scroll"));
+				}
+
+				if(interaction.commandName == "ys") {
+					this.interaction_wait(interaction);
+					this.managers.get("search").ytSearchInteraction(this.client, interaction, this.managers.get("scroll"));
+				}
+
+			}
+		})
+
 		this.dlog("Waiting for discord...");
 		this.client.login(this.codes.token);
+	}
+
+	
+	interaction_wait(interaction) {
+		this.client.api.interactions(interaction.id, interaction.token).callback.post({
+			data: {
+				type: 5,
+				data: {
+					content: 'im thinking...'
+				}
+			}
+		})
+	}
+
+	interaction_ok(interaction) {
+		console.log(interaction);
+		this.client.api.interactions(interaction.id, interaction.token).callback.post({
+			data: {
+				type: 4,
+				data: {
+					content: 'donezo'
+				}
+			}
+		})
+	}
+
+	interaction_bad(interaction) {
+		this.client.api.interactions(interaction.id, interaction.token).callback.post({
+			data: {
+				type: 4,
+				data: {
+					content: 'congrats goddam'
+				}
+			}
+		})
 	}
 
 	checkWordsForBlacklist(words) {	

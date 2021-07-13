@@ -23,6 +23,7 @@ module.exports = class embeds {
 			video: 13632027, // #D0021B
 			image: 14707627, // #E06BAB
 			warn: 16728663, // #B52F49
+			success: 12512682, // #BEEDAA
 			reference: 10526880, // #7FA864
 		}, config);
 	}
@@ -296,6 +297,16 @@ module.exports = class embeds {
 			title: "⚠️✋",
 			description: msg,
 			color: this.colors.leaderboard
+		};
+
+		return({"embeds":[embed]});
+	}
+
+	success(msg) {
+		var embed = {
+			title: "🎉",
+			description: msg,
+			color: this.colors.success
 		};
 
 		return({"embeds":[embed]});

@@ -31,6 +31,41 @@ module.exports = class Necessary {
 	getConfig() {
 		return json.readFileSync('config.json');
 	}	
+	
+	interaction_wait(client, interaction) {
+		this.client.api.interactions(interaction.id, interaction.token).callback.post({
+			data: {
+				type: 5,
+				data: {
+					content: 'im thinking...'
+				}
+			}
+		})
+	}
+
+	interaction_ok(client, interaction) {
+		client.api.interactions(interaction.id, interaction.token).callback.post({
+			data: {
+				type: 4,
+				data: {
+					content: 'donezo'
+				}
+			}
+		})
+	}
+
+	interaction_bad(client, interaction) {
+		client.api.interactions(interaction.id, interaction.token).callback.post({
+			data: {
+				type: 4,
+				data: {
+					content: 'congrats goddam'
+				}
+			}
+		})
+	}
+
+
 
 	setConfig(where, what, config) {
 		console.log(where);
